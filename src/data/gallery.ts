@@ -8,7 +8,7 @@ export const GALLERY: { src: string; caption: L }[] = [
   },
   {
     src: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80",
-    caption: { ar: "فريق العمل والتدريب", fr: "Travail d'équipe et formation", en: "Teamwork and training" },
+    caption: { ar: "فريق العمل والتدريب", fr: "Travail d'equipe et formation", en: "Teamwork and training" },
   },
   {
     src: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80",
@@ -24,6 +24,30 @@ export const GALLERY: { src: string; caption: L }[] = [
   },
   {
     src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80",
-    caption: { ar: "حفل تخرج المتدربين", fr: "Cérémonie de remise des diplômes", en: "Trainees graduation ceremony" },
+    caption: { ar: "حفل تخرج المتدربين", fr: "Ceremonie de remise des diplomes", en: "Trainees graduation ceremony" },
+  },
+  {
+    src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
+    caption: { ar: "مشاريع جماعية وتعاون", fr: "Projets de groupe et collaboration", en: "Group projects and collaboration" },
+  },
+  {
+    src: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1200&q=80",
+    caption: { ar: "مجموعات دراسية", fr: "Groupes d'etude", en: "Study groups" },
+  },
+  {
+    src: "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=1200&q=80",
+    caption: { ar: "محاضرات وندوات", fr: "Conferences et seminaires", en: "Lectures and seminars" },
+  },
+  {
+    src: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=1200&q=80",
+    caption: { ar: "مخابر ومعدات حديثة", fr: "Laboratoires et equipements modernes", en: "Modern labs and equipment" },
+  },
+  {
+    src: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80",
+    caption: { ar: "اجتماعات الأعمال", fr: "Reunions professionnelles", en: "Business meetings" },
+  },
+  {
+    src: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=1200&q=80",
+    caption: { ar: "فضاءات تعلم ملهمة", fr: "Espaces d'apprentissage inspirants", en: "Inspiring learning spaces" },
   },
 ];
