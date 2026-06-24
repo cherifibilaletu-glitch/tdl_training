@@ -1,0 +1,138 @@
+{
+  "brand": {
+    "name": "Institut de Développement Technique"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "programs": "Formations",
+    "corporate": "Entreprises",
+    "languages": "Langues",
+    "gallery": "Galerie",
+    "news": "Actualités",
+    "documents": "Documents",
+    "faq": "FAQ",
+    "contact": "Contact"
+  },
+  "footer": {
+    "about": "À propos",
+    "quick": "Liens rapides",
+    "more": "Autres liens",
+    "rights": "Tous droits réservés © 2026 Institut de Développement Technique"
+  },
+  "common": {
+    "readMore": "Lire la suite",
+    "viewAll": "Voir tout",
+    "contactUs": "Contactez-nous",
+    "callNow": "Appeler maintenant",
+    "getStarted": "Commencer",
+    "learnMore": "En savoir plus",
+    "back": "Retour à l'accueil"
+  },
+  "home": {
+    "heroEyebrow": "Institut de Développement Technique — Ouargla",
+    "heroTitle": "Nous bâtissons les compétences qui façonnent l'avenir",
+    "heroSubtitle": "Une formation professionnelle dans un environnement moderne, encadrée par des formateurs experts et des programmes reconnus.",
+    "heroCta": "Découvrir nos formations",
+    "heroCta2": "Nous contacter",
+    "statsEyebrow": "Nos chiffres",
+    "statsTitle": "Une confiance traduite en chiffres",
+    "domainsEyebrow": "Nos domaines",
+    "domainsTitle": "Domaines de formation",
+    "domainsSubtitle": "Nos programmes couvrent les secteurs les plus demandés.",
+    "programsEyebrow": "Programmes",
+    "programsTitle": "Formations sélectionnées",
+    "programsSubtitle": "Une sélection de nos meilleures formations.",
+    "whyEyebrow": "Pourquoi nous",
+    "whyTitle": "Pourquoi choisir l'IDT",
+    "whySubtitle": "Des atouts qui rendent votre expérience unique.",
+    "ctaTitle": "Prêt à développer vos compétences ?",
+    "ctaSubtitle": "Rejoignez des milliers d'apprenants et commencez votre parcours dès aujourd'hui.",
+    "ctaBtn": "S'inscrire"
+  },
+  "about": {
+    "eyebrow": "À propos",
+    "title": "Institut de Développement Technique",
+    "subtitle": "Un institut de formation de référence à Ouargla, engagé pour un enseignement de qualité adapté au marché du travail.",
+    "valuesEyebrow": "Nos valeurs",
+    "valuesTitle": "Les valeurs qui nous animent",
+    "whyEyebrow": "Nos atouts",
+    "whyTitle": "Pourquoi nous sommes le meilleur choix"
+  },
+  "programs": {
+    "eyebrow": "Formations",
+    "title": "Nos formations",
+    "subtitle": "Explorez nos formations par domaine et par niveau.",
+    "filterDomain": "Domaine",
+    "filterLevel": "Niveau",
+    "duration": "Durée",
+    "price": "Prix",
+    "cert": "Certificat",
+    "noResults": "Aucune formation ne correspond à votre sélection."
+  },
+  "corporate": {
+    "eyebrow": "Entreprises",
+    "title": "Solutions de formation pour entreprises",
+    "subtitle": "Des programmes sur mesure pour renforcer les compétences de vos équipes.",
+    "featuresEyebrow": "Nos atouts",
+    "featuresTitle": "Ce que nous offrons aux entreprises",
+    "stepsEyebrow": "Notre méthode",
+    "stepsTitle": "Notre méthode en quatre étapes",
+    "ctaTitle": "Besoin d'un programme pour votre organisation ?",
+    "ctaSubtitle": "Contactez-nous pour concevoir une solution adaptée à vos besoins.",
+    "ctaBtn": "Demander un devis"
+  },
+  "languages": {
+    "eyebrow": "Langues",
+    "title": "Cours de langues",
+    "subtitle": "Apprenez les langues avec une méthode moderne et des formateurs spécialisés.",
+    "methodsEyebrow": "Notre méthode",
+    "methodsTitle": "Notre approche pédagogique",
+    "coursesTitle": "Cours disponibles",
+    "levelsTitle": "Niveaux d'étude",
+    "featuresTitle": "Points forts du cours",
+    "levels": "Niveaux"
+  },
+  "gallery": {
+    "eyebrow": "Galerie",
+    "title": "Galerie photos",
+    "subtitle": "Aperçus de notre environnement d'apprentissage et de nos activités."
+  },
+  "news": {
+    "eyebrow": "Actualités",
+    "title": "Dernières actualités",
+    "subtitle": "Suivez les dernières nouvelles et activités de l'institut."
+  },
+  "documents": {
+    "eyebrow": "Documents",
+    "title": "Télécharger les documents",
+    "subtitle": "Téléchargez les documents et formulaires officiels de l'institut.",
+    "download": "Télécharger",
+    "notesTitle": "Remarques importantes"
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Questions fréquentes",
+    "subtitle": "Réponses aux questions les plus courantes.",
+    "searchPlaceholder": "Rechercher une question..."
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Contactez-nous",
+    "subtitle": "Nous sommes là pour répondre à vos questions et vous aider.",
+    "formName": "Nom complet",
+    "formEmail": "Adresse e-mail",
+    "formPhone": "Numéro de téléphone",
+    "formMessage": "Votre message",
+    "formSubmit": "Envoyer le message",
+    "infoTitle": "Coordonnées",
+    "hoursTitle": "Heures d'ouverture",
+    "addressTitle": "Adresse",
+    "phoneTitle": "Téléphone",
+    "emailTitle": "E-mail"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "subtitle": "Désolé, la page que vous recherchez n'existe pas."
+  }
+}

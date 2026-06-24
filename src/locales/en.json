@@ -1,0 +1,138 @@
+{
+  "brand": {
+    "name": "Technical Development Institute"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "programs": "Programs",
+    "corporate": "Corporate",
+    "languages": "Languages",
+    "gallery": "Gallery",
+    "news": "News",
+    "documents": "Documents",
+    "faq": "FAQ",
+    "contact": "Contact"
+  },
+  "footer": {
+    "about": "About",
+    "quick": "Quick links",
+    "more": "More links",
+    "rights": "All rights reserved © 2026 Technical Development Institute"
+  },
+  "common": {
+    "readMore": "Read more",
+    "viewAll": "View all",
+    "contactUs": "Contact us",
+    "callNow": "Call now",
+    "getStarted": "Get started",
+    "learnMore": "Learn more",
+    "back": "Back to home"
+  },
+  "home": {
+    "heroEyebrow": "Technical Development Institute — Ouargla",
+    "heroTitle": "We build the skills that shape the future",
+    "heroSubtitle": "Professional training in a modern environment, led by expert trainers with recognized programs that open the doors to the job market.",
+    "heroCta": "Explore our programs",
+    "heroCta2": "Contact us",
+    "statsEyebrow": "Our numbers",
+    "statsTitle": "Trust reflected in numbers",
+    "domainsEyebrow": "Our domains",
+    "domainsTitle": "Training domains",
+    "domainsSubtitle": "Our programs cover the most in-demand sectors.",
+    "programsEyebrow": "Programs",
+    "programsTitle": "Selected programs",
+    "programsSubtitle": "A selection of our top courses.",
+    "whyEyebrow": "Why us",
+    "whyTitle": "Why choose TDI",
+    "whySubtitle": "Advantages that make your experience unique.",
+    "ctaTitle": "Ready to grow your skills?",
+    "ctaSubtitle": "Join thousands of learners and start your career journey with us today.",
+    "ctaBtn": "Register now"
+  },
+  "about": {
+    "eyebrow": "About us",
+    "title": "Technical Development Institute",
+    "subtitle": "A leading training institute in Ouargla, committed to quality education aligned with the job market.",
+    "valuesEyebrow": "Our values",
+    "valuesTitle": "The values we believe in",
+    "whyEyebrow": "Our strengths",
+    "whyTitle": "Why we are the best choice"
+  },
+  "programs": {
+    "eyebrow": "Programs",
+    "title": "Our programs",
+    "subtitle": "Explore our training programs by domain and level.",
+    "filterDomain": "Domain",
+    "filterLevel": "Level",
+    "duration": "Duration",
+    "price": "Price",
+    "cert": "Certificate",
+    "noResults": "No programs match your selection."
+  },
+  "corporate": {
+    "eyebrow": "Corporate",
+    "title": "Corporate training solutions",
+    "subtitle": "Programs designed to boost the skills of your teams.",
+    "featuresEyebrow": "Our strengths",
+    "featuresTitle": "What we offer companies",
+    "stepsEyebrow": "How we work",
+    "stepsTitle": "Our method in four steps",
+    "ctaTitle": "Need a program for your organization?",
+    "ctaSubtitle": "Contact us to design a training solution that fits your needs.",
+    "ctaBtn": "Request a quote"
+  },
+  "languages": {
+    "eyebrow": "Languages",
+    "title": "Language courses",
+    "subtitle": "Learn languages with a modern method and specialized trainers.",
+    "methodsEyebrow": "Our method",
+    "methodsTitle": "Our teaching approach",
+    "coursesTitle": "Available courses",
+    "levelsTitle": "Study levels",
+    "featuresTitle": "Course highlights",
+    "levels": "Levels"
+  },
+  "gallery": {
+    "eyebrow": "Gallery",
+    "title": "Photo gallery",
+    "subtitle": "Glimpses of our learning environment and activities."
+  },
+  "news": {
+    "eyebrow": "News",
+    "title": "Latest news",
+    "subtitle": "Follow the latest updates and activities of the institute."
+  },
+  "documents": {
+    "eyebrow": "Documents",
+    "title": "Download documents",
+    "subtitle": "Download the institute's official documents and forms.",
+    "download": "Download",
+    "notesTitle": "Important notes"
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Frequently asked questions",
+    "subtitle": "Answers to the most common questions.",
+    "searchPlaceholder": "Search a question..."
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Contact us",
+    "subtitle": "We are here to answer your questions and help you.",
+    "formName": "Full name",
+    "formEmail": "Email address",
+    "formPhone": "Phone number",
+    "formMessage": "Your message",
+    "formSubmit": "Send message",
+    "infoTitle": "Contact information",
+    "hoursTitle": "Opening hours",
+    "addressTitle": "Address",
+    "phoneTitle": "Phone",
+    "emailTitle": "Email"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "subtitle": "Sorry, the page you are looking for does not exist."
+  }
+}
