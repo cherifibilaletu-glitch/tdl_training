@@ -74,6 +74,25 @@ body {
   }
 }
 
+/* Hero cinematic motion -------------------------------------------- */
+@keyframes heroZoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.12);
+  }
+}
+.hero-zoom {
+  animation: heroZoom 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-zoom {
+    animation: none;
+  }
+}
+
 /* Subtle scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
