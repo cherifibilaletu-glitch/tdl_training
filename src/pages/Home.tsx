@@ -177,7 +177,7 @@ export default function Home() {
               <span>{pick(HERO.badge)}</span>
             </span>
             <img
-              src="/calligraphy.png"
+              src="/calligraphy.jpg"
               alt="معهد التطوير التقني"
               className="mt-6 h-auto w-full max-w-sm drop-shadow-2xl sm:max-w-md lg:max-w-lg"
             />
