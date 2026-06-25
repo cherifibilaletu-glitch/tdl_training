@@ -21,6 +21,7 @@ import { Section } from "../components/Section";
 import Reveal from "../components/Reveal";
 import { useLang } from "../lib/useLang";
 import { PROGRAMS, DOMAINS, LEVELS, CONTACT } from "../data/site";
+import { RT } from "../data/registerCopy";
 
 // To also receive registrations by EMAIL with the attached documents,
 // create a FREE access key at https://web3forms.com (just enter your email,
@@ -35,75 +36,11 @@ const inputClass =
   "w-full rounded-xl border border-navy-200 bg-white px-4 py-2.5 text-sm text-navy-900 shadow-sm outline-none transition placeholder:text-navy-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100 dark:border-navy-700 dark:bg-navy-900 dark:text-white dark:focus:ring-brand-900/30";
 const labelClass =
   "mb-1.5 flex items-center gap-1 text-sm font-medium text-navy-700 dark:text-navy-200";
+const errClass = inputClass + " border-red-400 focus:border-red-500 focus:ring-red-100";
 
-const T = {
-  eyebrow: { ar: "التسجيل", fr: "Inscription", en: "Registration" },
-  title: { ar: "استمارة التسجيل في المعهد", fr: "Formulaire d'inscription", en: "Institute Registration" },
-  subtitle: {
-    ar: "املأ بياناتك بدقّة وسيتواصل معك فريقنا لتأكيد تسجيلك في البرنامج الذي اخترته.",
-    fr: "Remplissez vos informations avec précision ; notre équipe vous contactera pour confirmer votre inscription au programme choisi.",
-    en: "Fill in your details accurately and our team will contact you to confirm your enrollment in the chosen program.",
-  },
-  trustSecure: { ar: "بياناتك تبقى سرية وآمنة", fr: "Vos données restent confidentielles", en: "Your data stays confidential" },
-  trustFast: { ar: "ردّ خلال يوم عمل واحد", fr: "Réponse sous un jour ouvrable", en: "Reply within one working day" },
-  trustFree: { ar: "التسجيل المبدئي مجاني", fr: "Préinscription gratuite", en: "Free pre-registration" },
-  sec1: { ar: "المعلومات الشخصية", fr: "Informations personnelles", en: "Personal Information" },
-  sec1sub: { ar: "كما تظهر في وثائقك الرسمية", fr: "Telles qu'elles figurent sur vos documents officiels", en: "As they appear on your official documents" },
-  sec2: { ar: "معلومات الاتصال", fr: "Coordonnées", en: "Contact Information" },
-  sec2sub: { ar: "حتى نتمكّن من التواصل معك", fr: "Pour que nous puissions vous joindre", en: "So we can reach you" },
-  sec3: { ar: "البرنامج المطلوب", fr: "Programme souhaité", en: "Desired Program" },
-  sec3sub: { ar: "اختر المجال ثمّ البرنامج المناسب", fr: "Choisissez le domaine puis le programme", en: "Choose the field then the program" },
-  sec4: { ar: "الوثائق", fr: "Documents", en: "Documents" },
-  sec4sub: { ar: "أرفق صور بطاقة التعريف والشهادات (اختياري)", fr: "Joignez la pièce d'identité et les diplômes (optionnel)", en: "Attach ID and diplomas (optional)" },
-  firstName: { ar: "الاسم", fr: "Prénom", en: "First name" },
-  lastName: { ar: "اللقب", fr: "Nom", en: "Last name" },
-  birthDate: { ar: "تاريخ الميلاد", fr: "Date de naissance", en: "Date of birth" },
-  gender: { ar: "الجنس", fr: "Genre", en: "Gender" },
-  male: { ar: "ذكر", fr: "Homme", en: "Male" },
-  female: { ar: "أنثى", fr: "Femme", en: "Female" },
-  education: { ar: "المستوى الدراسي", fr: "Niveau scolaire", en: "Education level" },
-  phone: { ar: "رقم الهاتف", fr: "Téléphone", en: "Phone number" },
-  email: { ar: "البريد الإلكتروني", fr: "E-mail", en: "Email" },
-  city: { ar: "المدينة / الولاية", fr: "Ville / Wilaya", en: "City / Wilaya" },
-  address: { ar: "العنوان", fr: "Adresse", en: "Address" },
-  domain: { ar: "المجال", fr: "Domaine", en: "Field" },
-  program: { ar: "البرنامج", fr: "Programme", en: "Program" },
-  schedule: { ar: "التوقيت المفضّل", fr: "Horaire préféré", en: "Preferred schedule" },
-  morning: { ar: "صباحي", fr: "Matin", en: "Morning" },
-  evening: { ar: "مسائي", fr: "Soir", en: "Evening" },
-  weekend: { ar: "نهاية الأسبوع", fr: "Week-end", en: "Weekend" },
-  notes: { ar: "ملاحظات إضافية", fr: "Remarques", en: "Additional notes" },
-  choose: { ar: "اختر...", fr: "Choisir...", en: "Choose..." },
-  dropFiles: { ar: "اضغط لاختيار الملفات أو اسحبها إلى هنا", fr: "Cliquez pour choisir des fichiers ou glissez-les ici", en: "Click to choose files or drag them here" },
-  fileHint: { ar: "صور أو PDF — بطاقة التعريف، الشهادات، صورة شمسية", fr: "Images ou PDF — pièce d'identité, diplômes, photo", en: "Images or PDF — ID, diplomas, photo" },
-  consent: { ar: "أؤكّد أنّ المعلومات المُدخلة صحيحة وأوافق على أن يتواصل معي المعهد.", fr: "Je confirme que les informations sont exactes et j'accepte d'être contacté par l'institut.", en: "I confirm the information is accurate and agree to be contacted by the institute." },
-  submit: { ar: "إرسال طلب التسجيل", fr: "Envoyer la demande", en: "Submit registration" },
-  sending: { ar: "جارٍ الإرسال...", fr: "Envoi...", en: "Sending..." },
-  required: { ar: "هذا الحقل مطلوب", fr: "Ce champ est requis", en: "This field is required" },
-  consentRequired: { ar: "يرجى الموافقة للمتابعة", fr: "Veuillez accepter pour continuer", en: "Please accept to continue" },
-  successTitle: { ar: "تمّ استلام طلبك بنجاح", fr: "Votre demande a bien été reçue", en: "Your request was received" },
-  successMsg: {
-    ar: "شكراً لتسجيلك. سيتواصل معك فريق المعهد قريباً لتأكيد التسجيل واستكمال الوثائق.",
-    fr: "Merci pour votre inscription. L'équipe de l'institut vous contactera bientôt pour confirmer et compléter votre dossier.",
-    en: "Thank you for registering. The institute's team will contact you soon to confirm and complete your file.",
-  },
-  waNote: {
-    ar: "افتح محادثة واتساب التي ظهرت لك وأرسل الرسالة، ثمّ أرفق صور وثائقك في نفس المحادثة.",
-    fr: "Ouvrez la conversation WhatsApp affichée et envoyez le message, puis joignez vos documents dans la même conversation.",
-    en: "Open the WhatsApp chat that appeared and send the message, then attach your documents in the same chat.",
-  },
-  openWa: { ar: "فتح واتساب", fr: "Ouvrir WhatsApp", en: "Open WhatsApp" },
-  another: { ar: "تسجيل طلب آخر", fr: "Nouvelle demande", en: "Submit another" },
-  errorMsg: { ar: "تعذّر الإرسال، يرجى المحاولة مجدداً أو التواصل عبر واتساب.", fr: "Échec de l'envoi, réessayez ou contactez-nous via WhatsApp.", en: "Sending failed, please try again or contact us via WhatsApp." },
-};
+type Opt = { value: string; label: string };
 
-const TRUST = [
-  { icon: <ShieldCheck className="h-5 w-5" />, label: T.trustSecure },
-  { icon: <Clock className="h-5 w-5" />, label: T.trustFast },
-  { icon: <BadgeCheck className="h-5 w-5" />, label: T.trustFree },
-];
-
-function FormSection({
+function Section1({
   step,
   icon,
   title,
@@ -129,6 +66,72 @@ function FormSection({
         </div>
       </div>
       {children}
+    </div>
+  );
+}
+
+function Field(props: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  required?: boolean;
+  error?: boolean;
+  errText: string;
+  type?: string;
+  dir?: string;
+  placeholder?: string;
+  full?: boolean;
+}) {
+  return (
+    <div className={props.full ? "sm:col-span-2" : ""} data-error={props.error ? "true" : "false"}>
+      <label className={labelClass}>
+        <span>{props.label}</span>
+        {props.required ? <span className="text-red-500">*</span> : null}
+      </label>
+      <input
+        type={props.type || "text"}
+        dir={props.dir}
+        placeholder={props.placeholder}
+        value={props.value}
+        onChange={(e) => props.onChange(e.target.value)}
+        className={props.error ? errClass : inputClass}
+      />
+      {props.error ? <p className="mt-1 text-xs text-red-500">{props.errText}</p> : null}
+    </div>
+  );
+}
+
+function Picker(props: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  placeholder: string;
+  options: Opt[];
+  required?: boolean;
+  error?: boolean;
+  errText: string;
+  full?: boolean;
+}) {
+  return (
+    <div className={props.full ? "sm:col-span-2" : ""} data-error={props.error ? "true" : "false"}>
+      <label className={labelClass}>
+        <span>{props.label}</span>
+        {props.required ? <span className="text-red-500">*</span> : null}
+      </label>
+      <div className="relative">
+        <select
+          value={props.value}
+          onChange={(e) => props.onChange(e.target.value)}
+          className={(props.error ? errClass : inputClass) + " appearance-none pe-10"}
+        >
+          <option value="">{props.placeholder}</option>
+          {props.options.map((o) => (
+            <option key={o.value} value={o.value}>{o.label}</option>
+          ))}
+        </select>
+        <ChevronDown className="pointer-events-none absolute end-3 top-1/2 h-4 w-4 -translate-y-1/2 text-navy-400" />
+      </div>
+      {props.error ? <p className="mt-1 text-xs text-red-500">{props.errText}</p> : null}
     </div>
   );
 }
@@ -162,28 +165,24 @@ export default function Register() {
     ? PROGRAMS.filter((p) => p.domain === form.domain)
     : PROGRAMS;
 
-  const set = (name: string, value: string) =>
-    setForm((f) => ({ ...f, [name]: value }));
-
-  const onDomain = (value: string) =>
-    setForm((f) => ({ ...f, domain: value, program: "" }));
-
+  const req = pick(RT.required);
+  const set = (name: string, value: string) => setForm((f) => ({ ...f, [name]: value }));
+  const onDomain = (value: string) => setForm((f) => ({ ...f, domain: value, program: "" }));
   const onFiles = (list: FileList | null) => {
     if (!list) return;
     setFiles((prev) => [...prev, ...Array.from(list)]);
   };
-  const removeFile = (idx: number) =>
-    setFiles((prev) => prev.filter((_, i) => i !== idx));
+  const removeFile = (idx: number) => setFiles((prev) => prev.filter((_, i) => i !== idx));
 
   const genderLabel = () =>
-    form.gender === "male" ? pick(T.male) : form.gender === "female" ? pick(T.female) : "";
+    form.gender === "male" ? pick(RT.male) : form.gender === "female" ? pick(RT.female) : "";
   const scheduleLabel = () =>
     form.schedule === "morning"
-      ? pick(T.morning)
+      ? pick(RT.morning)
       : form.schedule === "evening"
-      ? pick(T.evening)
+      ? pick(RT.evening)
       : form.schedule === "weekend"
-      ? pick(T.weekend)
+      ? pick(RT.weekend)
       : "";
 
   const buildMessage = () => {
@@ -191,29 +190,29 @@ export default function Register() {
     const domainObj = DOMAINS.find((d) => d.key === form.domain);
     const eduObj = LEVELS.find((l) => l.key === form.education);
     const rows: string[] = [];
-    rows.push("📝 " + pick(T.title));
+    rows.push("📝 " + pick(RT.title));
     rows.push("");
-    rows.push("👤 " + pick(T.sec1));
-    rows.push(pick(T.firstName) + ": " + form.firstName);
-    rows.push(pick(T.lastName) + ": " + form.lastName);
-    if (form.birthDate) rows.push(pick(T.birthDate) + ": " + form.birthDate);
-    if (genderLabel()) rows.push(pick(T.gender) + ": " + genderLabel());
-    if (eduObj) rows.push(pick(T.education) + ": " + pick(eduObj.label));
+    rows.push("👤 " + pick(RT.sec1));
+    rows.push(pick(RT.firstName) + ": " + form.firstName);
+    rows.push(pick(RT.lastName) + ": " + form.lastName);
+    if (form.birthDate) rows.push(pick(RT.birthDate) + ": " + form.birthDate);
+    if (genderLabel()) rows.push(pick(RT.gender) + ": " + genderLabel());
+    if (eduObj) rows.push(pick(RT.education) + ": " + pick(eduObj.label));
     rows.push("");
-    rows.push("📞 " + pick(T.sec2));
-    rows.push(pick(T.phone) + ": " + form.phone);
-    if (form.email) rows.push(pick(T.email) + ": " + form.email);
-    rows.push(pick(T.city) + ": " + form.city);
-    if (form.address) rows.push(pick(T.address) + ": " + form.address);
+    rows.push("📞 " + pick(RT.sec2));
+    rows.push(pick(RT.phone) + ": " + form.phone);
+    if (form.email) rows.push(pick(RT.email) + ": " + form.email);
+    rows.push(pick(RT.city) + ": " + form.city);
+    if (form.address) rows.push(pick(RT.address) + ": " + form.address);
     rows.push("");
-    rows.push("🎓 " + pick(T.sec3));
-    if (domainObj) rows.push(pick(T.domain) + ": " + pick(domainObj.label));
-    rows.push(pick(T.program) + ": " + (program ? pick(program.title) : "-"));
-    if (scheduleLabel()) rows.push(pick(T.schedule) + ": " + scheduleLabel());
-    if (files.length > 0) rows.push(pick(T.sec4) + ": " + files.length);
+    rows.push("🎓 " + pick(RT.sec3));
+    if (domainObj) rows.push(pick(RT.domain) + ": " + pick(domainObj.label));
+    rows.push(pick(RT.program) + ": " + (program ? pick(program.title) : "-"));
+    if (scheduleLabel()) rows.push(pick(RT.schedule) + ": " + scheduleLabel());
+    if (files.length > 0) rows.push(pick(RT.sec4) + ": " + files.length);
     if (form.notes) {
       rows.push("");
-      rows.push(pick(T.notes) + ": " + form.notes);
+      rows.push(pick(RT.notes) + ": " + form.notes);
     }
     return rows.join("\n");
   };
@@ -248,21 +247,15 @@ export default function Register() {
         data.append("phone", form.phone);
         if (form.email) data.append("email", form.email);
         data.append("message", message);
-        files.forEach((file, idx) =>
-          data.append("attachment_" + (idx + 1), file, file.name),
-        );
-        const res = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          body: data,
-        });
+        files.forEach((file, idx) => data.append("attachment_" + (idx + 1), file, file.name));
+        const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: data });
         const json = await res.json();
         setStatus(json.success ? "success" : "error");
       } catch {
         setStatus("error");
       }
     } else {
-      const url =
-        "https://wa.me/" + CONTACT.whatsapp + "?text=" + encodeURIComponent(message);
+      const url = "https://wa.me/" + CONTACT.whatsapp + "?text=" + encodeURIComponent(message);
       setWaLink(url);
       window.open(url, "_blank");
       setStatus("success");
@@ -295,27 +288,27 @@ export default function Register() {
   if (status === "success") {
     return (
       <>
-        <PageHero image={HERO_IMG} eyebrow={pick(T.eyebrow)} title={pick(T.successTitle)} />
+        <PageHero image={HERO_IMG} eyebrow={pick(RT.eyebrow)} title={pick(RT.successTitle)} />
         <Section>
           <Reveal className="mx-auto max-w-2xl text-center">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400">
               <CheckCircle2 className="h-9 w-9" />
             </div>
-            <h2 className="mt-6 text-2xl font-bold text-navy-900 dark:text-white">{pick(T.successTitle)}</h2>
-            <p className="muted mx-auto mt-3 max-w-xl text-sm leading-relaxed sm:text-base">{pick(T.successMsg)}</p>
+            <h2 className="mt-6 text-2xl font-bold text-navy-900 dark:text-white">{pick(RT.successTitle)}</h2>
+            <p className="muted mx-auto mt-3 max-w-xl text-sm leading-relaxed sm:text-base">{pick(RT.successMsg)}</p>
             {waLink ? (
               <div className="mx-auto mt-6 max-w-md rounded-xl border border-brand-100 bg-brand-50/70 p-4 text-sm text-navy-700 dark:border-navy-800 dark:bg-navy-900 dark:text-navy-100">
-                {pick(T.waNote)}
+                {pick(RT.waNote)}
               </div>
             ) : null}
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               {waLink ? (
                 <a href={waLink} target="_blank" rel="noreferrer" className="btn btn-primary">
                   <MessageCircle size={16} />
-                  <span>{pick(T.openWa)}</span>
+                  <span>{pick(RT.openWa)}</span>
                 </a>
               ) : null}
-              <button type="button" onClick={reset} className="btn btn-outline">{pick(T.another)}</button>
+              <button type="button" onClick={reset} className="btn btn-outline">{pick(RT.another)}</button>
             </div>
           </Reveal>
         </Section>
@@ -325,120 +318,96 @@ export default function Register() {
 
   return (
     <>
-      <PageHero image={HERO_IMG} eyebrow={pick(T.eyebrow)} title={pick(T.title)} subtitle={pick(T.subtitle)} />
+      <PageHero image={HERO_IMG} eyebrow={pick(RT.eyebrow)} title={pick(RT.title)} subtitle={pick(RT.subtitle)} />
 
       <section className="border-b border-navy-100 bg-white dark:border-navy-800 dark:bg-navy-950">
         <div className="container-tdi grid grid-cols-1 gap-x-6 gap-y-4 py-8 sm:grid-cols-3">
-          {TRUST.map((item, i) => (
-            <Reveal key={i} delay={i * 0.05} className="flex items-center gap-3">
-              <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-navy-800 dark:text-brand-400">{item.icon}</span>
-              <span className="text-sm font-medium text-navy-700 dark:text-navy-100">{pick(item.label)}</span>
-            </Reveal>
-          ))}
+          <Reveal className="flex items-center gap-3">
+            <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-navy-800 dark:text-brand-400"><ShieldCheck className="h-5 w-5" /></span>
+            <span className="text-sm font-medium text-navy-700 dark:text-navy-100">{pick(RT.trustSecure)}</span>
+          </Reveal>
+          <Reveal delay={0.05} className="flex items-center gap-3">
+            <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-navy-800 dark:text-brand-400"><Clock className="h-5 w-5" /></span>
+            <span className="text-sm font-medium text-navy-700 dark:text-navy-100">{pick(RT.trustFast)}</span>
+          </Reveal>
+          <Reveal delay={0.1} className="flex items-center gap-3">
+            <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-navy-800 dark:text-brand-400"><BadgeCheck className="h-5 w-5" /></span>
+            <span className="text-sm font-medium text-navy-700 dark:text-navy-100">{pick(RT.trustFree)}</span>
+          </Reveal>
         </div>
       </section>
 
       <Section>
         <form onSubmit={handleSubmit} noValidate className="mx-auto max-w-3xl space-y-6">
-          <FormSection step="1" icon={<User className="h-5 w-5" />} title={pick(T.sec1)} subtitle={pick(T.sec1sub)}>
+          <Section1 step="1" icon={<User className="h-5 w-5" />} title={pick(RT.sec1)} subtitle={pick(RT.sec1sub)}>
             <div className="grid gap-5 sm:grid-cols-2">
-              <div data-error={errors.firstName ? "true" : "false"}>
-                <label className={labelClass}>{pick(T.firstName)}<span className="text-red-500">*</span></label>
-                <input value={form.firstName} onChange={(e) => set("firstName", e.target.value)} className={inputClass + (errors.firstName ? " border-red-400 focus:border-red-500 focus:ring-red-100" : "")} />
-                {errors.firstName ? <p className="mt-1 text-xs text-red-500">{pick(T.required)}</p> : null}
-              </div>
-              <div data-error={errors.lastName ? "true" : "false"}>
-                <label className={labelClass}>{pick(T.lastName)}<span className="text-red-500">*</span></label>
-                <input value={form.lastName} onChange={(e) => set("lastName", e.target.value)} className={inputClass + (errors.lastName ? " border-red-400 focus:border-red-500 focus:ring-red-100" : "")} />
-                {errors.lastName ? <p className="mt-1 text-xs text-red-500">{pick(T.required)}</p> : null}
-              </div>
-              <div>
-                <label className={labelClass}>{pick(T.birthDate)}</label>
-                <input type="date" value={form.birthDate} onChange={(e) => set("birthDate", e.target.value)} className={inputClass} />
-              </div>
-              <div>
-                <label className={labelClass}>{pick(T.gender)}</label>
-                <div className="relative">
-                  <select value={form.gender} onChange={(e) => set("gender", e.target.value)} className={inputClass + " appearance-none pe-10"}>
-                    <option value="">{pick(T.choose)}</option>
-                    <option value="male">{pick(T.male)}</option>
-                    <option value="female">{pick(T.female)}</option>
-                  </select>
-                  <ChevronDown className="pointer-events-none absolute end-3 top-1/2 h-4 w-4 -translate-y-1/2 text-navy-400" />
-                </div>
-              </div>
-              <div className="sm:col-span-2">
-                <label className={labelClass}>{pick(T.education)}</label>
-                <div className="relative">
-                  <select value={form.education} onChange={(e) => set("education", e.target.value)} className={inputClass + " appearance-none pe-10"}>
-                    <option value="">{pick(T.choose)}</option>
-                    {levels.map((l) => (
-                      <option key={l.key} value={l.key}>{pick(l.label)}</option>
-                    ))}
-                  </select>
-                  <ChevronDown className="pointer-events-none absolute end-3 top-1/2 h-4 w-4 -translate-y-1/2 text-navy-400" />
-                </div>
-              </div>
+              <Field label={pick(RT.firstName)} value={form.firstName} onChange={(v) => set("firstName", v)} required error={errors.firstName} errText={req} />
+              <Field label={pick(RT.lastName)} value={form.lastName} onChange={(v) => set("lastName", v)} required error={errors.lastName} errText={req} />
+              <Field label={pick(RT.birthDate)} type="date" value={form.birthDate} onChange={(v) => set("birthDate", v)} errText={req} />
+              <Picker label={pick(RT.gender)} value={form.gender} onChange={(v) => set("gender", v)} placeholder={pick(RT.choose)} errText={req} options={[{ value: "male", label: pick(RT.male) }, { value: "female", label: pick(RT.female) }]} />
+              <Picker full label={pick(RT.education)} value={form.education} onChange={(v) => set("education", v)} placeholder={pick(RT.choose)} errText={req} options={levels.map((l) => ({ value: l.key, label: pick(l.label) }))} />
             </div>
-          </FormSection>
+          </Section1>
 
-          <FormSection step="2" icon={<Phone className="h-5 w-5" />} title={pick(T.sec2)} subtitle={pick(T.sec2sub)}>
+          <Section1 step="2" icon={<Phone className="h-5 w-5" />} title={pick(RT.sec2)} subtitle={pick(RT.sec2sub)}>
             <div className="grid gap-5 sm:grid-cols-2">
-              <div data-error={errors.phone ? "true" : "false"}>
-                <label className={labelClass}>{pick(T.phone)}<span className="text-red-500">*</span></label>
-                <input type="tel" dir="ltr" value={form.phone} onChange={(e) => set("phone", e.target.value)} className={inputClass + (errors.phone ? " border-red-400 focus:border-red-500 focus:ring-red-100" : "")} placeholder="+213 ..." />
-                {errors.phone ? <p className="mt-1 text-xs text-red-500">{pick(T.required)}</p> : null}
-              </div>
-              <div>
-                <label className={labelClass}>{pick(T.email)}</label>
-                <input type="email" dir="ltr" value={form.email} onChange={(e) => set("email", e.target.value)} className={inputClass} placeholder="example@email.com" />
-              </div>
-              <div data-error={errors.city ? "true" : "false"}>
-                <label className={labelClass}>{pick(T.city)}<span className="text-red-500">*</span></label>
-                <input value={form.city} onChange={(e) => set("city", e.target.value)} className={inputClass + (errors.city ? " border-red-400 focus:border-red-500 focus:ring-red-100" : "")} />
-                {errors.city ? <p className="mt-1 text-xs text-red-500">{pick(T.required)}</p> : null}
-              </div>
-              <div>
-                <label className={labelClass}>{pick(T.address)}</label>
-                <input value={form.address} onChange={(e) => set("address", e.target.value)} className={inputClass} />
-              </div>
+              <Field label={pick(RT.phone)} type="tel" dir="ltr" placeholder="+213 ..." value={form.phone} onChange={(v) => set("phone", v)} required error={errors.phone} errText={req} />
+              <Field label={pick(RT.email)} type="email" dir="ltr" placeholder="example@email.com" value={form.email} onChange={(v) => set("email", v)} errText={req} />
+              <Field label={pick(RT.city)} value={form.city} onChange={(v) => set("city", v)} required error={errors.city} errText={req} />
+              <Field label={pick(RT.address)} value={form.address} onChange={(v) => set("address", v)} errText={req} />
             </div>
-          </FormSection>
+          </Section1>
 
-          <FormSection step="3" icon={<GraduationCap className="h-5 w-5" />} title={pick(T.sec3)} subtitle={pick(T.sec3sub)}>
+          <Section1 step="3" icon={<GraduationCap className="h-5 w-5" />} title={pick(RT.sec3)} subtitle={pick(RT.sec3sub)}>
             <div className="grid gap-5 sm:grid-cols-2">
-              <div>
-                <label className={labelClass}>{pick(T.domain)}</label>
-                <div className="relative">
-                  <select value={form.domain} onChange={(e) => onDomain(e.target.value)} className={inputClass + " appearance-none pe-10"}>
-                    <option value="">{pick(T.choose)}</option>
-                    {domains.map((d) => (
-                      <option key={d.key} value={d.key}>{pick(d.label)}</option>
-                    ))}
-                  </select>
-                  <ChevronDown className="pointer-events-none absolute end-3 top-1/2 h-4 w-4 -translate-y-1/2 text-navy-400" />
-                </div>
-              </div>
-              <div data-error={errors.program ? "true" : "false"}>
-                <label className={labelClass}>{pick(T.program)}<span className="text-red-500">*</span></label>
-                <div className="relative">
-                  <select value={form.program} onChange={(e) => set("program", e.target.value)} className={inputClass + " appearance-none pe-10" + (errors.program ? " border-red-400 focus:border-red-500 focus:ring-red-100" : "")}>
-                    <option value="">{pick(T.choose)}</option>
-                    {availablePrograms.map((p) => (
-                      <option key={p.id} value={p.id}>{pick(p.title)}</option>
-                    ))}
-                  </select>
-                  <ChevronDown className="pointer-events-none absolute end-3 top-1/2 h-4 w-4 -translate-y-1/2 text-navy-400" />
-                </div>
-                {errors.program ? <p className="mt-1 text-xs text-red-500">{pick(T.required)}</p> : null}
-              </div>
-              <div className="sm:col-span-2">
-                <label className={labelClass}>{pick(T.schedule)}</label>
-                <div className="relative">
-                  <select value={form.schedule} onChange={(e) => set("schedule", e.target.value)} className={inputClass + " appearance-none pe-10"}>
-                    <option value="">{pick(T.choose)}</option>
-                    <option value="morning">{pick(T.morning)}</option>
-                    <option value="evening">{pick(T.evening)}</option>
-                    <option value="weekend">{pick(T.weekend)}</option>
-                  </select>
-                  <ChevronDown className="pointer-events-none absol
+              <Picker label={pick(RT.domain)} value={form.domain} onChange={onDomain} placeholder={pick(RT.choose)} errText={req} options={domains.map((d) => ({ value: d.key, label: pick(d.label) }))} />
+              <Picker label={pick(RT.program)} value={form.program} onChange={(v) => set("program", v)} placeholder={pick(RT.choose)} required error={errors.program} errText={req} options={availablePrograms.map((p) => ({ value: p.id, label: pick(p.title) }))} />
+              <Picker full label={pick(RT.schedule)} value={form.schedule} onChange={(v) => set("schedule", v)} placeholder={pick(RT.choose)} errText={req} options={[{ value: "morning", label: pick(RT.morning) }, { value: "evening", label: pick(RT.evening) }, { value: "weekend", label: pick(RT.weekend) }]} />
+            </div>
+          </Section1>
+
+          <Section1 step="4" icon={<FileText className="h-5 w-5" />} title={pick(RT.sec4)} subtitle={pick(RT.sec4sub)}>
+            <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-navy-200 bg-navy-50/50 px-6 py-10 text-center transition hover:border-brand-400 hover:bg-brand-50/40 dark:border-navy-700 dark:bg-navy-900/40">
+              <UploadCloud className="h-8 w-8 text-brand-500" />
+              <span className="mt-3 text-sm font-medium text-navy-700 dark:text-navy-100">{pick(RT.dropFiles)}</span>
+              <span className="muted mt-1 text-xs">{pick(RT.fileHint)}</span>
+              <input type="file" multiple accept="image/*,application/pdf" onChange={(e) => onFiles(e.target.files)} className="hidden" />
+            </label>
+            {files.length > 0 ? (
+              <ul className="mt-4 space-y-2">
+                {files.map((file, i) => (
+                  <li key={i} className="flex items-center justify-between gap-3 rounded-lg border border-navy-100 bg-white px-3 py-2 text-sm dark:border-navy-800 dark:bg-navy-900">
+                    <span className="flex items-center gap-2 truncate text-navy-700 dark:text-navy-100">
+                      <FileText className="h-4 w-4 flex-none text-brand-500" />
+                      <span className="truncate">{file.name}</span>
+                    </span>
+                    <button type="button" onClick={() => removeFile(i)} aria-label="remove" className="flex-none rounded-md p-1 text-navy-400 transition hover:bg-navy-100 hover:text-red-500 dark:hover:bg-navy-800">
+                      <X className="h-4 w-4" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+            <div className="mt-5">
+              <label className={labelClass}>{pick(RT.notes)}</label>
+              <textarea rows={3} value={form.notes} onChange={(e) => set("notes", e.target.value)} className={inputClass} />
+            </div>
+          </Section1>
+
+          <div className="card p-6 sm:p-8">
+            <label className="flex cursor-pointer items-start gap-3">
+              <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-1 h-4 w-4 flex-none rounded border-navy-300 text-brand-600 focus:ring-brand-500" />
+              <span className="text-sm leading-relaxed text-navy-600 dark:text-navy-200">{pick(RT.consent)}</span>
+            </label>
+            {errors.consent ? <p className="mt-2 text-xs text-red-500">{pick(RT.consentRequired)}</p> : null}
+            <button type="submit" disabled={status === "sending"} className="btn btn-primary mt-6 w-full justify-center sm:w-auto">
+              {status === "sending" ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send size={16} />}
+              <span>{status === "sending" ? pick(RT.sending) : pick(RT.submit)}</span>
+            </button>
+            {status === "error" ? <p className="mt-3 text-sm text-red-500">{pick(RT.errorMsg)}</p> : null}
+          </div>
+        </form>
+      </Section>
+    </>
+  );
+}
