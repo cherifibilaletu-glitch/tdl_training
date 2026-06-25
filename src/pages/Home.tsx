@@ -7,6 +7,40 @@ import { useLang } from "../lib/useLang";
 import { STATS, DOMAINS, PROGRAMS } from "../data/site";
 import { WHY_US } from "../data/about";
 
+const img = (id: string) =>
+  "https://images.unsplash.com/" + id + "?auto=format&fit=crop&w=1400&q=80";
+
+const DOMAIN_IMGS = [
+  "1454165804606-c3d57bc86b40",
+  "1517048676732-d65bc937f952",
+  "1497032628192-86f99bcd76bc",
+  "1521737711867-e3b97375f902",
+  "1456513080510-7bf3a84b82f8",
+  "1427504494785-3a9ca7044f45",
+  "1543269865-cbf427effbad",
+];
+
+const GALLERY = [
+  "1523240795612-9a054b0db644",
+  "1454165804606-c3d57bc86b40",
+  "1497032628192-86f99bcd76bc",
+  "1456513080510-7bf3a84b82f8",
+  "1521737711867-e3b97375f902",
+  "1427504494785-3a9ca7044f45",
+];
+
+const GAL_HEAD = {
+  eyebrow: { ar: "في صور", fr: "En images", en: "In pictures" },
+  title: { ar: "أجواء التكوين في معهدنا", fr: "L'ambiance de formation chez nous", en: "Training life at our institute" },
+  subtitle: {
+    ar: "لمحات من قاعاتنا وورشاتنا وأنشطة متدرّبينا",
+    fr: "Un aperçu de nos salles, ateliers et activités de nos stagiaires",
+    en: "A glimpse of our rooms, workshops and trainee activities",
+  },
+};
+
+const WHYUS_IMG = "1581092160562-40aa08e78837";
+
 const HERO = {
   badge: {
     ar: "معهد تكوين معتمد · أكثر من 15 سنة خبرة",
@@ -163,14 +197,20 @@ export default function Home() {
 
       <Section>
         <SectionHeader eyebrow={t("home.domainsEyebrow")} title={t("home.domainsTitle")} subtitle={t("home.domainsSubtitle")} center />
-        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {domains.map((d, i) => (
-            <Reveal key={d.key} delay={i * 0.03}>
+            <Reveal key={d.key} delay={i * 0.04}>
               <Link
                 to={"/domains/" + d.key}
-                className="card flex h-full items-center justify-center p-5 text-center text-sm font-medium text-navy-700 transition hover:border-brand-400 hover:text-brand-700 dark:text-navy-100 dark:hover:text-brand-300"
+                className="group relative flex h-36 items-end overflow-hidden rounded-2xl shadow-soft"
               >
-                {pick(d.label)}
+                <img
+                  src={img(DOMAIN_IMGS[i % DOMAIN_IMGS.length])}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/45 to-transparent" />
+                <span className="relative z-10 p-4 text-sm font-semibold leading-snug text-white">{pick(d.label)}</span>
               </Link>
             </Reveal>
           ))}
@@ -185,14 +225,23 @@ export default function Home() {
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((p, i) => (
             <Reveal key={p.id} delay={i * 0.04}>
-              <article className="card h-full p-6">
-                <h3 className="text-base font-semibold text-navy-900 dark:text-white">{pick(p.title)}</h3>
-                <p className="muted mt-2 text-sm leading-relaxed line-clamp-3">{pick(p.desc)}</p>
-                <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
-                  <span className="rounded-full bg-brand-50 px-2.5 py-1 font-medium text-brand-700 dark:bg-navy-800 dark:text-brand-300">{pick(p.duration)}</span>
-                  <span className="text-navy-500 dark:text-navy-300">{pick(p.price)}</span>
+              <article className="card group h-full overflow-hidden p-0">
+                <div className="h-36 overflow-hidden">
+                  <img
+                    src={img(DOMAIN_IMGS[i % DOMAIN_IMGS.length])}
+                    alt=""
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                  />
                 </div>
-                <Link to={"/domains/" + p.domain} className="link-quiet mt-4 inline-flex text-sm">{pick(MORE)}</Link>
+                <div className="p-6">
+                  <h3 className="text-base font-semibold text-navy-900 dark:text-white">{pick(p.title)}</h3>
+                  <p className="muted mt-2 text-sm leading-relaxed line-clamp-3">{pick(p.desc)}</p>
+                  <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
+                    <span className="rounded-full bg-brand-50 px-2.5 py-1 font-medium text-brand-700 dark:bg-navy-800 dark:text-brand-300">{pick(p.duration)}</span>
+                    <span className="text-navy-500 dark:text-navy-300">{pick(p.price)}</span>
+                  </div>
+                  <Link to={"/domains/" + p.domain} className="link-quiet mt-4 inline-flex text-sm">{pick(MORE)}</Link>
+                </div>
               </article>
             </Reveal>
           ))}
@@ -200,23 +249,51 @@ export default function Home() {
       </Section>
 
       <Section>
-        <SectionHeader eyebrow={pick(WHYUS_HEAD.eyebrow)} title={pick(WHYUS_HEAD.title)} subtitle={pick(WHYUS_HEAD.subtitle)} center />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {WHY_US.map((w, i) => (
-            <Reveal key={w.title.en} delay={i * 0.04}>
-              <article className="card h-full p-6">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-navy-800 dark:text-brand-400">
-                  <Icon name={w.icon} className="h-5 w-5" />
-                </div>
-                <h3 className="mt-4 text-base font-semibold text-navy-900 dark:text-white">{pick(w.title)}</h3>
-                <p className="muted mt-2 text-sm leading-relaxed">{pick(w.desc)}</p>
-              </article>
+        <SectionHeader eyebrow={pick(GAL_HEAD.eyebrow)} title={pick(GAL_HEAD.title)} subtitle={pick(GAL_HEAD.subtitle)} center />
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+          {GALLERY.map((id, i) => (
+            <Reveal key={id} delay={i * 0.05}>
+              <div className="group overflow-hidden rounded-2xl shadow-soft">
+                <img
+                  src={img(id)}
+                  alt=""
+                  className="h-40 w-full object-cover transition duration-700 group-hover:scale-110 sm:h-48"
+                />
+              </div>
             </Reveal>
           ))}
         </div>
       </Section>
 
       <Section className="bg-navy-50/60 dark:bg-navy-900/40">
+        <SectionHeader eyebrow={pick(WHYUS_HEAD.eyebrow)} title={pick(WHYUS_HEAD.title)} subtitle={pick(WHYUS_HEAD.subtitle)} center />
+        <div className="mt-10 grid items-stretch gap-8 lg:grid-cols-12">
+          <Reveal className="lg:col-span-5">
+            <div className="group h-full overflow-hidden rounded-3xl shadow-soft">
+              <img
+                src={img(WHYUS_IMG)}
+                alt=""
+                className="h-72 w-full object-cover transition duration-700 group-hover:scale-105 lg:h-full"
+              />
+            </div>
+          </Reveal>
+          <div className="grid gap-5 sm:grid-cols-2 lg:col-span-7">
+            {WHY_US.map((w, i) => (
+              <Reveal key={w.title.en} delay={i * 0.04}>
+                <article className="card h-full p-6">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-navy-800 dark:text-brand-400">
+                    <Icon name={w.icon} className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-4 text-base font-semibold text-navy-900 dark:text-white">{pick(w.title)}</h3>
+                  <p className="muted mt-2 text-sm leading-relaxed">{pick(w.desc)}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      <Section>
         <SectionHeader eyebrow={pick(TESTI.eyebrow)} title={pick(TESTI.title)} center />
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {TESTIMONIALS.map((tm, i) => (
@@ -224,9 +301,12 @@ export default function Home() {
               <figure className="card h-full p-6">
                 <div className="text-base tracking-wide text-brand-400">★★★★★</div>
                 <blockquote className="mt-3 text-sm leading-relaxed text-navy-700 dark:text-navy-100">{pick(tm.quote)}</blockquote>
-                <figcaption className="mt-4">
-                  <div className="font-semibold text-navy-900 dark:text-white">{tm.name}</div>
-                  <div className="muted text-xs">{pick(tm.role)}</div>
+                <figcaption className="mt-5 flex items-center gap-3">
+                  <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white">{tm.name.charAt(0)}</span>
+                  <span>
+                    <span className="block font-semibold text-navy-900 dark:text-white">{tm.name}</span>
+                    <span className="muted block text-xs">{pick(tm.role)}</span>
+                  </span>
                 </figcaption>
               </figure>
             </Reveal>
@@ -234,7 +314,13 @@ export default function Home() {
         </div>
       </Section>
 
-      <section className="bg-navy-900">
+      <section className="relative isolate overflow-hidden">
+        <img
+          src={img("1517048676732-d65bc937f952")}
+          alt=""
+          className="absolute inset-0 -z-10 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-navy-950/92 to-navy-900/80" />
         <div className="container-tdi py-16 text-center sm:py-20">
           <Reveal className="mx-auto max-w-2xl">
             <h2 className="text-2xl font-bold text-white sm:text-3xl">{pick(CTA.title)}</h2>
