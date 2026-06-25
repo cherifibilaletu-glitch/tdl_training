@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { FormEvent, ReactNode } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
   User,
   Phone,
@@ -138,6 +139,9 @@ function Picker(props: {
 
 export default function Register() {
   const { pick } = useLang();
+  const [params] = useSearchParams();
+  const preProgramId = params.get("program") || "";
+  const preProgram = PROGRAMS.find((p) => p.id === preProgramId);
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -148,8 +152,8 @@ export default function Register() {
     email: "",
     city: "",
     address: "",
-    domain: "",
-    program: "",
+    domain: preProgram ? preProgram.domain : "",
+    program: preProgram ? preProgram.id : "",
     schedule: "",
     notes: "",
   });
