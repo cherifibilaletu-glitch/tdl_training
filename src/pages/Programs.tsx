@@ -1,10 +1,17 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Section } from "../components/Section";
 import PageHero from "../components/PageHero";
 import Reveal from "../components/Reveal";
 import { useLang } from "../lib/useLang";
 import { DOMAINS, LEVELS, PROGRAMS } from "../data/site";
+
+const REGISTER = {
+  ar: "سجّل في هذا البرنامج",
+  fr: "S'inscrire à ce programme",
+  en: "Register for this program",
+};
 
 export default function Programs() {
   const { t } = useTranslation();
@@ -62,7 +69,7 @@ export default function Programs() {
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {filtered.map((p, i) => (
                 <Reveal key={p.id} delay={(i % 3) * 0.04}>
-                  <article className="card h-full p-6">
+                  <article className="card flex h-full flex-col p-6">
                     <h3 className="text-base font-semibold text-navy-900 dark:text-white">{pick(p.title)}</h3>
                     <p className="muted mt-2 text-sm leading-relaxed">{pick(p.desc)}</p>
                     <dl className="mt-4 space-y-1.5 text-xs">
@@ -79,6 +86,12 @@ export default function Programs() {
                         <dd className="text-navy-700 dark:text-navy-100">{pick(p.cert)}</dd>
                       </div>
                     </dl>
+                    <Link
+                      to={"/register?program=" + p.id}
+                      className="btn btn-primary mt-6 w-full justify-center text-sm"
+                    >
+                      {pick(REGISTER)}
+                    </Link>
                   </article>
                 </Reveal>
               ))}

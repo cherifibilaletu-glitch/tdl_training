@@ -5,6 +5,12 @@ import Logo from "./Logo";
 import { CONTACT } from "../data/site";
 import { useLang } from "../lib/useLang";
 
+const REGISTER = {
+  ar: "سجّل الآن",
+  fr: "S'inscrire maintenant",
+  en: "Register now",
+};
+
 export default function Footer() {
   const { t } = useTranslation();
   const { pick } = useLang();
@@ -31,6 +37,9 @@ export default function Footer() {
           <p className="muted max-w-xs text-sm leading-relaxed">
             {t("footer.about")}
           </p>
+          <Link to="/register" className="btn btn-primary text-sm">
+            {pick(REGISTER)}
+          </Link>
         </div>
 
         <div>
