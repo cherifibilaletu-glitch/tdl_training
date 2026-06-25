@@ -1,14 +1,18 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Logo from "./Logo";
 import ThemeToggle from "./ThemeToggle";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { ROUTES } from "../lib/routes";
+import { useLang } from "../lib/useLang";
+
+const REGISTER = { ar: "سجّل الآن", fr: "S'inscrire", en: "Register" };
 
 export default function Navbar() {
   const { t } = useTranslation();
+  const { pick } = useLang();
   const [open, setOpen] = useState(false);
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
@@ -37,6 +41,12 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <Link
+            to="/register"
+            className="hidden rounded-lg bg-brand-600 px-3.5 py-1.5 text-[13px] font-semibold text-white shadow-sm transition hover:bg-brand-700 sm:inline-flex"
+          >
+            {pick(REGISTER)}
+          </Link>
           <LanguageSwitcher />
           <ThemeToggle />
           <button
@@ -65,6 +75,13 @@ export default function Navbar() {
               </NavLink>
             ))}
           </div>
+          <Link
+            to="/register"
+            onClick={() => setOpen(false)}
+            className="container-tdi mt-3 flex justify-center rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white"
+          >
+            {pick(REGISTER)}
+          </Link>
         </nav>
       )}
     </header>

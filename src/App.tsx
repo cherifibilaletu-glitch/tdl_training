@@ -11,6 +11,7 @@ import News from "./pages/News";
 import Documents from "./pages/Documents";
 import Faq from "./pages/Faq";
 import Contact from "./pages/Contact";
+import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="documents" element={<Documents />} />
         <Route path="faq" element={<Faq />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="register" element={<Register />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
