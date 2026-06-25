@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Section, SectionHeader } from "../components/Section";
 import Reveal from "../components/Reveal";
 import Icon from "../components/Icon";
+import CountUp from "../components/CountUp";
 import SectorCoverflow from "../components/SectorCoverflow";
 import ProgramsMagazine from "../components/ProgramsMagazine";
 import HexGallery from "../components/HexGallery";
@@ -100,6 +101,11 @@ const CTA = {
   btn2: { ar: "تواصل معنا", fr: "Nous contacter", en: "Contact us" },
 };
 
+const STATS_HEAD = {
+  eyebrow: { ar: "أرقامنا", fr: "En chiffres", en: "By the numbers" },
+  title: { ar: "ثقة تترجمها الأرقام", fr: "Une confiance traduïte en chiffres", en: "Trust reflected in numbers" },
+};
+
 const TESTI = {
   eyebrow: { ar: "آراء المتدربين", fr: "Témoignages", en: "Testimonials" },
   title: { ar: "ماذا يقول متدرّبونا", fr: "Ce que disent nos stagiaires", en: "What our trainees say" },
@@ -150,29 +156,45 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-white to-transparent dark:from-navy-950" />
       </section>
 
-      <section className="border-b border-navy-100 bg-white dark:border-navy-800 dark:bg-navy-950">
-        <div className="container-tdi grid grid-cols-2 gap-x-6 gap-y-5 py-8 sm:grid-cols-4">
-          {TRUST.map((item, i) => (
-            <Reveal key={item.label.en} delay={i * 0.05} className="flex items-center gap-3">
-              <div className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-navy-800 dark:text-brand-400">
-                <Icon name={item.icon} className="h-5 w-5" />
-              </div>
-              <span className="text-sm font-medium text-navy-700 dark:text-navy-100">{pick(item.label)}</span>
-            </Reveal>
-          ))}
+      <section className="relative isolate overflow-hidden border-y border-navy-100 bg-gradient-to-b from-white to-navy-50/60 dark:border-navy-800 dark:from-navy-950 dark:to-navy-900/50">
+        <div className="pointer-events-none absolute -left-24 top-0 h-64 w-64 rounded-full bg-brand-400/10 blur-3xl" />
+        <div className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-brand-500/10 blur-3xl" />
+        <div className="container-tdi relative py-14 sm:py-16">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+            {TRUST.map((item, i) => (
+              <Reveal key={item.label.en} delay={i * 0.08} className="group">
+                <div className="flex h-full items-center gap-3 rounded-2xl border border-navy-100/80 bg-white/70 p-4 shadow-soft backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-brand-300 hover:shadow-card dark:border-navy-800 dark:bg-navy-900/60">
+                  <div className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-gradient-to-br from-brand-400/25 to-brand-600/10 text-brand-600 ring-1 ring-brand-300/40 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 dark:text-brand-300">
+                    <Icon name={item.icon} className="h-5 w-5" />
+                  </div>
+                  <span className="text-sm font-semibold text-navy-700 dark:text-navy-100">{pick(item.label)}</span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="my-10 h-px bg-gradient-to-r from-transparent via-brand-300/60 to-transparent" />
+
+          <Reveal className="text-center">
+            <span className="eyebrow">{pick(STATS_HEAD.eyebrow)}</span>
+            <h2 className="mt-2 text-xl font-bold tracking-tight text-navy-900 dark:text-white sm:text-2xl">{pick(STATS_HEAD.title)}</h2>
+          </Reveal>
+
+          <div className="mt-9 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
+            {STATS.map((s, i) => (
+              <Reveal key={s.value} delay={i * 0.1} className="group">
+                <div className="relative overflow-hidden rounded-2xl border border-navy-100/70 bg-white/60 px-4 py-8 text-center shadow-soft backdrop-blur transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-300/70 hover:shadow-card dark:border-navy-800 dark:bg-navy-900/50">
+                  <span className="pointer-events-none absolute inset-x-8 top-0 h-0.5 rounded-full bg-gradient-to-r from-transparent via-brand-400 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="text-gold display text-4xl font-extrabold leading-none sm:text-5xl">
+                    <CountUp value={s.value} />
+                  </div>
+                  <div className="muted mt-2.5 text-xs font-medium sm:text-sm">{pick(s.label)}</div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
-
-      <Section className="border-b border-navy-100 dark:border-navy-800">
-        <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
-          {STATS.map((s, i) => (
-            <Reveal key={s.value} delay={i * 0.05} className="text-center">
-              <div className="text-3xl font-bold text-brand-600 sm:text-4xl dark:text-brand-400">{s.value}</div>
-              <div className="muted mt-1 text-sm">{pick(s.label)}</div>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
 
       <Section>
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
