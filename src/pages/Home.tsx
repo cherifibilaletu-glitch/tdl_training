@@ -145,7 +145,7 @@ export default function Home() {
           alt=""
           className="hero-zoom absolute inset-0 -z-10 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-navy-950/92 via-navy-950/75 to-navy-900/55" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-navy-950/85 via-navy-950/60 to-navy-900/35" />
         <div className="container-tdi py-24 sm:py-32">
           <Reveal className="max-w-3xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur">
@@ -318,9 +318,9 @@ export default function Home() {
         <img
           src={img("1517048676732-d65bc937f952")}
           alt=""
-          className="absolute inset-0 -z-10 h-full w-full object-cover"
+          className="hero-zoom absolute inset-0 -z-10 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-navy-950/92 to-navy-900/80" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-navy-950/88 to-navy-900/70" />
         <div className="container-tdi py-16 text-center sm:py-20">
           <Reveal className="mx-auto max-w-2xl">
             <h2 className="text-2xl font-bold text-white sm:text-3xl">{pick(CTA.title)}</h2>
