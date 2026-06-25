@@ -6,6 +6,20 @@ import Icon from "../components/Icon";
 import { useLang } from "../lib/useLang";
 import { INTRO, VALUES, WHY_US } from "../data/about";
 
+const VIDEO_HEAD = {
+  eyebrow: { ar: "فيديو تعريفي", fr: "Vidéo de présentation", en: "Introduction video" },
+  title: {
+    ar: "تعرّف على معهد التطوير التقني",
+    fr: "Découvrez l'Institut de Développement Technique",
+    en: "Get to know the Technical Development Institute",
+  },
+  subtitle: {
+    ar: "جولة قصيرة داخل معهدنا وأجواء التكوين فيه",
+    fr: "Une courte visite de notre institut et de son ambiance de formation",
+    en: "A short tour inside our institute and its training atmosphere",
+  },
+};
+
 export default function About() {
   const { t } = useTranslation();
   const { pick } = useLang();
@@ -35,6 +49,23 @@ export default function About() {
       </Section>
 
       <Section className="bg-navy-50/60 dark:bg-navy-900/40">
+        <SectionHeader eyebrow={pick(VIDEO_HEAD.eyebrow)} title={pick(VIDEO_HEAD.title)} subtitle={pick(VIDEO_HEAD.subtitle)} center />
+        <Reveal className="mx-auto mt-10 max-w-4xl">
+          <div className="overflow-hidden rounded-3xl shadow-soft ring-1 ring-navy-100 dark:ring-navy-800">
+            <video
+              controls
+              playsInline
+              preload="metadata"
+              poster="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1600&q=80"
+              className="aspect-video w-full bg-navy-950"
+            >
+              <source src="/tdi-intro.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </Reveal>
+      </Section>
+
+      <Section>
         <SectionHeader eyebrow={t("about.valuesEyebrow")} title={t("about.valuesTitle")} center />
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {VALUES.map((v, i) => (
