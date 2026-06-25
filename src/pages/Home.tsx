@@ -153,7 +153,7 @@ export default function Home() {
             </div>
           </Reveal>
         </div>
-        <div class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-white to-transparent dark:from-navy-950" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-white to-transparent dark:from-navy-950" />
       </section>
 
       <section className="border-b border-navy-100 bg-white dark:border-navy-800 dark:bg-navy-950">
