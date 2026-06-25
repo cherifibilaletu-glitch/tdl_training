@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Section, SectionHeader } from "../components/Section";
@@ -74,12 +75,13 @@ const TRUST = [
 ];
 
 const ORBIT = {
-  center: { ar: "اختر مجالك", fr: "Choisissez votre domaine", en: "Choose your field" },
-  sub: { ar: "مرّر للإيقاف", fr: "Survolez pour arrêter", en: "Hover to stop" },
+  center: { ar: "اختر مجالك", fr: "Votre domaine", en: "Choose your field" },
+  stop: { ar: "اضغط للإيقاف", fr: "Cliquez pour arrêter", en: "Click to stop" },
+  play: { ar: "اضغط للتدوير", fr: "Cliquez pour tourner", en: "Click to spin" },
   hint: {
-    ar: "الدائرة تدور — مرّر فوقها لتتوقّف ثم اختر المجال المناسب",
-    fr: "Le cercle tourne — survolez-le pour l'arrêter, puis choisissez votre domaine",
-    en: "The circle rotates — hover to stop it, then pick your domain",
+    ar: "الدائرة تدور بثلاثية الأبعاد — اضغط على الزر في الوسط لإيقافها ثم اختر مجالك",
+    fr: "Le cercle tourne en 3D — cliquez sur le bouton central pour l'arrêter, puis choisissez votre domaine",
+    en: "The circle spins in 3D — click the center button to stop it, then pick your domain",
   },
 };
 
@@ -144,6 +146,7 @@ const TESTIMONIALS = [
 export default function Home() {
   const { t } = useTranslation();
   const { pick } = useLang();
+  const [spinning, setSpinning] = useState(true);
   const domains = DOMAINS.filter((d) => d.key !== "all");
   const featured = PROGRAMS.slice(0, 6);
   const step = 360 / domains.length;
@@ -209,31 +212,39 @@ export default function Home() {
       <Section>
         <SectionHeader eyebrow={t("home.domainsEyebrow")} title={t("home.domainsTitle")} subtitle={t("home.domainsSubtitle")} center />
         <p className="muted mx-auto mt-3 max-w-md text-center text-xs">{pick(ORBIT.hint)}</p>
-        <Reveal className="mt-4 flex justify-center">
-          <div className="orbit-stop relative aspect-square w-full max-w-lg scale-[0.72] sm:scale-90 lg:scale-100">
-            <div className="absolute left-1/2 top-1/2 z-20 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-navy-800 p-4 text-center text-white shadow-card dark:bg-brand-600">
-              <span className="text-sm font-bold leading-tight">{pick(ORBIT.center)}</span>
-              <span className="mt-1 text-[10px] text-navy-200">{pick(ORBIT.sub)}</span>
-            </div>
-            <div className="orbit-spin absolute inset-0">
-              {domains.map((d, i) => (
-                <div
-                  key={d.key}
-                  className="absolute left-1/2 top-1/2"
-                  style={ { transform: "rotate(" + step * i + "deg) translateY(-185px) rotate(" + -step * i + "deg)" } }
-                >
-                  <Link
-                    to={"/domains/" + d.key}
-                    className="orbit-spin-rev group/badge -ml-12 -mt-14 flex w-24 flex-col items-center gap-2"
+        <Reveal className="mt-2 flex justify-center">
+          <div className={"orbit-3d relative aspect-square w-full max-w-lg scale-[0.7] [perspective:1100px] sm:scale-90 lg:scale-100 " + (spinning ? "" : "orbit-paused")}>
+            <div className="absolute inset-0 [transform:rotateX(18deg)] [transform-style:preserve-3d]">
+              <div className="orbit-spin absolute inset-0 [transform-style:preserve-3d]">
+                {domains.map((d, i) => (
+                  <div
+                    key={d.key}
+                    className="absolute left-1/2 top-1/2 [transform-style:preserve-3d]"
+                    style={ { transform: "rotate(" + step * i + "deg) translateY(-185px) rotate(" + -step * i + "deg)" } }
                   >
-                    <span className="block h-16 w-16 overflow-hidden rounded-full ring-2 ring-white shadow-soft transition duration-300 hover:scale-110 hover:ring-brand-400 dark:ring-navy-800 sm:h-20 sm:w-20">
-                      <img src={img(DOMAIN_IMGS[i % DOMAIN_IMGS.length])} alt="" className="h-full w-full object-cover" />
-                    </span>
-                    <span className="max-w-[6rem] text-center text-[11px] font-medium leading-tight text-navy-700 dark:text-navy-100">{pick(d.label)}</span>
-                  </Link>
-                </div>
-              ))}
+                    <div className="orbit-spin-rev [transform-style:preserve-3d]">
+                      <Link
+                        to={"/domains/" + d.key}
+                        className="-ml-12 -mt-14 block w-24 [transform:rotateX(-18deg)] [transform-style:preserve-3d] transition-transform duration-300 hover:[transform:rotateX(-18deg)_translateZ(55px)_scale(1.08)]"
+                      >
+                        <span className="mx-auto block h-16 w-16 overflow-hidden rounded-full ring-2 ring-white shadow-card transition hover:ring-brand-400 dark:ring-navy-800 sm:h-20 sm:w-20">
+                          <img src={img(DOMAIN_IMGS[i % DOMAIN_IMGS.length])} alt="" className="h-full w-full object-cover" />
+                        </span>
+                        <span className="mx-auto mt-2 block max-w-[6rem] text-center text-[11px] font-medium leading-tight text-navy-700 dark:text-navy-100">{pick(d.label)}</span>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
+            <button
+              type="button"
+              onClick={() => setSpinning((s) => !s)}
+              className="absolute left-1/2 top-1/2 z-30 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-navy-800 p-4 text-center text-white shadow-card transition hover:bg-navy-700 dark:bg-brand-600 dark:hover:bg-brand-500"
+            >
+              <span className="text-sm font-bold leading-tight">{pick(ORBIT.center)}</span>
+              <span className="mt-1 text-[10px] text-navy-200">{pick(spinning ? ORBIT.stop : ORBIT.play)}</span>
+            </button>
           </div>
         </Reveal>
         <div className="mt-6 text-center">
