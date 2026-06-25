@@ -84,7 +84,7 @@ export default function Home() {
     <>
       <section className="relative isolate overflow-hidden">
         <img
-          src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=2000&q=80"
+          src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=2000&q=80"
           alt=""
           className="hero-zoom absolute inset-0 -z-10 h-full w-full object-cover"
         />
@@ -143,9 +143,12 @@ export default function Home() {
         <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
           {domains.map((d, i) => (
             <Reveal key={d.key} delay={i * 0.03}>
-              <div className="card flex h-full items-center justify-center p-5 text-center text-sm font-medium text-navy-700 dark:text-navy-100">
+              <Link
+                to={"/domains/" + d.key}
+                className="card flex h-full items-center justify-center p-5 text-center text-sm font-medium text-navy-700 transition hover:border-brand-400 hover:text-brand-700 dark:text-navy-100 dark:hover:text-brand-300"
+              >
                 {pick(d.label)}
-              </div>
+              </Link>
             </Reveal>
           ))}
         </div>
@@ -161,66 +164,4 @@ export default function Home() {
             <Reveal key={p.id} delay={i * 0.04}>
               <article className="card h-full p-6">
                 <h3 className="text-base font-semibold text-navy-900 dark:text-white">{pick(p.title)}</h3>
-                <p className="muted mt-2 text-sm leading-relaxed">{pick(p.desc)}</p>
-                <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-xs text-navy-500 dark:text-navy-300">
-                  <span>{t("programs.duration")}: {pick(p.duration)}</span>
-                  <span>{t("programs.cert")}: {pick(p.cert)}</span>
-                </div>
-              </article>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
-
-      <Section>
-        <SectionHeader eyebrow={t("home.whyEyebrow")} title={t("home.whyTitle")} subtitle={t("home.whySubtitle")} center />
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {WHY_US.map((w, i) => (
-            <Reveal key={w.title.en} delay={i * 0.04}>
-              <div className="flex gap-4">
-                <div className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-navy-800 dark:text-brand-400">
-                  <Icon name={w.icon} className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="text-base font-semibold text-navy-900 dark:text-white">{pick(w.title)}</h3>
-                  <p className="muted mt-1 text-sm leading-relaxed">{pick(w.desc)}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
-
-      <Section className="bg-navy-50/60 dark:bg-navy-900/40">
-        <SectionHeader eyebrow={pick(TESTI.eyebrow)} title={pick(TESTI.title)} center />
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {TESTIMONIALS.map((tm, i) => (
-            <Reveal key={tm.name} delay={i * 0.05}>
-              <figure className="card h-full p-6">
-                <div className="text-base tracking-wide text-brand-500">★★★★★</div>
-                <blockquote className="muted mt-3 text-sm leading-relaxed">{pick(tm.quote)}</blockquote>
-                <figcaption className="mt-5 flex items-center gap-3">
-                  <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white">{tm.name.slice(0, 1)}</div>
-                  <div>
-                    <div className="text-sm font-semibold text-navy-900 dark:text-white">{tm.name}</div>
-                    <div className="muted text-xs">{pick(tm.role)}</div>
-                  </div>
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
-
-      <Section>
-        <Reveal className="rounded-2xl border border-navy-100 bg-navy-50/60 p-8 text-center sm:p-12 dark:border-navy-800 dark:bg-navy-900/40">
-          <h2 className="text-2xl font-bold tracking-tight text-navy-900 sm:text-3xl dark:text-white">{t("home.ctaTitle")}</h2>
-          <p className="muted mx-auto mt-3 max-w-xl text-sm sm:text-base">{t("home.ctaSubtitle")}</p>
-          <div className="mt-6 flex justify-center">
-            <Link to="/contact" className="btn btn-primary">{t("home.ctaBtn")}</Link>
-          </div>
-        </Reveal>
-      </Section>
-    </>
-  );
-}
+                <p className="muted mt-2

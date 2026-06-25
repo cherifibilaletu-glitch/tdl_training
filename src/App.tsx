@@ -3,6 +3,7 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Programs from "./pages/Programs";
+import Domain from "./pages/Domain";
 import Corporate from "./pages/Corporate";
 import Languages from "./pages/Languages";
 import Gallery from "./pages/Gallery";
@@ -19,6 +20,7 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="programs" element={<Programs />} />
+        <Route path="domains/:key" element={<Domain />} />
         <Route path="corporate" element={<Corporate />} />
         <Route path="languages" element={<Languages />} />
         <Route path="gallery" element={<Gallery />} />
