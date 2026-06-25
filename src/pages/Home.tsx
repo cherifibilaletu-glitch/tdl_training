@@ -39,6 +39,29 @@ const TRUST = [
   },
 ];
 
+const WHYUS_HEAD = {
+  eyebrow: { ar: "لماذا نحن", fr: "Pourquoi nous", en: "Why us" },
+  title: { ar: "لماذا تختار معهد التطوير التقني؟", fr: "Pourquoi choisir TDI ?", en: "Why choose TDI?" },
+  subtitle: {
+    ar: "مقوّمات تجعل تجربتك التدريبية متميّزة وفعّالة",
+    fr: "Des atouts qui rendent votre expérience de formation distinctive et efficace",
+    en: "Strengths that make your training experience distinctive and effective",
+  },
+};
+
+const CTA = {
+  title: { ar: "جاهز لتطوير مهاراتك؟", fr: "Prêt à développer vos compétences ?", en: "Ready to grow your skills?" },
+  subtitle: {
+    ar: "سجّل الآن في البرنامج المناسب لك وسيتواصل معك فريقنا لإتمام تسجيلك.",
+    fr: "Inscrivez-vous dès maintenant au programme qui vous convient ; notre équipe vous contactera pour finaliser votre inscription.",
+    en: "Register now for the program that suits you and our team will contact you to complete your enrollment.",
+  },
+  btn: { ar: "سجّل الآن", fr: "S'inscrire maintenant", en: "Register now" },
+  btn2: { ar: "تواصل معنا", fr: "Nous contacter", en: "Contact us" },
+};
+
+const MORE = { ar: "اعرف المزيد", fr: "En savoir plus", en: "Learn more" };
+
 const TESTI = {
   eyebrow: { ar: "آراء المتدربين", fr: "Témoignages", en: "Testimonials" },
   title: { ar: "ماذا يقول متدرّبونا", fr: "Ce que disent nos stagiaires", en: "What our trainees say" },
@@ -102,8 +125,8 @@ export default function Home() {
               {t("home.heroSubtitle")}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link to="/programs" className="btn btn-primary">{t("home.heroCta")}</Link>
-              <Link to="/contact" className="btn btn-outline border-white/30 text-white hover:bg-white/10">{t("home.heroCta2")}</Link>
+              <Link to="/register" className="btn btn-primary">{pick(CTA.btn)}</Link>
+              <Link to="/programs" className="btn btn-outline border-white/30 text-white hover:bg-white/10">{t("home.heroCta")}</Link>
             </div>
             <div className="mt-7 flex items-center gap-2.5 text-sm text-navy-100">
               <span className="text-base tracking-wide text-brand-300">★★★★★</span>
@@ -164,4 +187,65 @@ export default function Home() {
             <Reveal key={p.id} delay={i * 0.04}>
               <article className="card h-full p-6">
                 <h3 className="text-base font-semibold text-navy-900 dark:text-white">{pick(p.title)}</h3>
-                <p className="muted mt-2
+                <p className="muted mt-2 text-sm leading-relaxed line-clamp-3">{pick(p.desc)}</p>
+                <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
+                  <span className="rounded-full bg-brand-50 px-2.5 py-1 font-medium text-brand-700 dark:bg-navy-800 dark:text-brand-300">{pick(p.duration)}</span>
+                  <span className="text-navy-500 dark:text-navy-300">{pick(p.price)}</span>
+                </div>
+                <Link to={"/domains/" + p.domain} className="link-quiet mt-4 inline-flex text-sm">{pick(MORE)}</Link>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeader eyebrow={pick(WHYUS_HEAD.eyebrow)} title={pick(WHYUS_HEAD.title)} subtitle={pick(WHYUS_HEAD.subtitle)} center />
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {WHY_US.map((w, i) => (
+            <Reveal key={w.title.en} delay={i * 0.04}>
+              <article className="card h-full p-6">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-navy-800 dark:text-brand-400">
+                  <Icon name={w.icon} className="h-5 w-5" />
+                </div>
+                <h3 className="mt-4 text-base font-semibold text-navy-900 dark:text-white">{pick(w.title)}</h3>
+                <p className="muted mt-2 text-sm leading-relaxed">{pick(w.desc)}</p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      <Section className="bg-navy-50/60 dark:bg-navy-900/40">
+        <SectionHeader eyebrow={pick(TESTI.eyebrow)} title={pick(TESTI.title)} center />
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {TESTIMONIALS.map((tm, i) => (
+            <Reveal key={tm.name} delay={i * 0.05}>
+              <figure className="card h-full p-6">
+                <div className="text-base tracking-wide text-brand-400">★★★★★</div>
+                <blockquote className="mt-3 text-sm leading-relaxed text-navy-700 dark:text-navy-100">{pick(tm.quote)}</blockquote>
+                <figcaption className="mt-4">
+                  <div className="font-semibold text-navy-900 dark:text-white">{tm.name}</div>
+                  <div className="muted text-xs">{pick(tm.role)}</div>
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      <section className="bg-navy-900">
+        <div className="container-tdi py-16 text-center sm:py-20">
+          <Reveal className="mx-auto max-w-2xl">
+            <h2 className="text-2xl font-bold text-white sm:text-3xl">{pick(CTA.title)}</h2>
+            <p className="mt-4 text-sm leading-relaxed text-navy-200 sm:text-base">{pick(CTA.subtitle)}</p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Link to="/register" className="btn btn-primary">{pick(CTA.btn)}</Link>
+              <Link to="/contact" className="btn btn-outline border-white/30 text-white hover:bg-white/10">{pick(CTA.btn2)}</Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+    </>
+  );
+}
