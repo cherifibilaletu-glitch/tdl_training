@@ -93,6 +93,44 @@ body {
   }
 }
 
+/* Rotating domain selector ----------------------------------------- */
+@keyframes orbitSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes orbitSpinRev {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+.orbit-spin {
+  animation: orbitSpin 48s linear infinite;
+  transform-origin: center;
+  will-change: transform;
+}
+.orbit-spin-rev {
+  animation: orbitSpinRev 48s linear infinite;
+  transform-origin: center;
+  will-change: transform;
+}
+.orbit-stop:hover .orbit-spin,
+.orbit-stop:hover .orbit-spin-rev {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbit-spin,
+  .orbit-spin-rev {
+    animation: none;
+  }
+}
+
 /* Subtle scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
