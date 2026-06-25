@@ -12,9 +12,21 @@ export const LANGS = {
 
 export type LangCode = keyof typeof LANGS;
 
-// The site always starts in Arabic (RTL). Visitors can still switch to
-// French or English during their session via the language selector, but
-// every fresh load defaults back to Arabic.
+// Belt-and-suspenders: previous builds used i18next-browser-languagedetector,
+// which stored a chosen language under "tdi_lang" (and i18next's own keys).
+// Wipe those before init so every fresh page load starts in Arabic for
+// everyone, regardless of browser language or any leftover preference.
+if (typeof window !== "undefined") {
+  try {
+    localStorage.removeItem("tdi_lang");
+    localStorage.removeItem("i18nextLng");
+    sessionStorage.removeItem("tdi_lang");
+    sessionStorage.removeItem("i18nextLng");
+  } catch {
+    /* storage may be disabled in private mode */
+  }
+}
+
 i18n
   .use(initReactI18next)
   .init({
@@ -28,6 +40,12 @@ i18n
     supportedLngs: ["ar", "fr", "en"],
     interpolation: { escapeValue: false },
   });
+
+// Defensive: force Arabic again right after init in case anything else
+// (browser extension, future detector, etc.) tries to change it on boot.
+if (i18n.language !== "ar") {
+  i18n.changeLanguage("ar");
+}
 
 function applyDir(lng: string) {
   const code = (lng in LANGS ? lng : "ar") as LangCode;
