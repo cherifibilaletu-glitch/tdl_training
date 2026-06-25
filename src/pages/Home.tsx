@@ -171,7 +171,7 @@ export default function Home() {
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-navy-950/85 via-navy-950/60 to-navy-900/35" />
         <div className="container-tdi py-24 sm:py-32">
-          <Reveal className="max-w-3xl">
+          <Reveal className="max-w-3xl ltr:ml-auto rtl:mr-auto ltr:text-right rtl:text-left">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur">
               <Icon name="badge-check" className="h-4 w-4 text-brand-300" />
               <span>{pick(HERO.badge)}</span>
@@ -179,16 +179,16 @@ export default function Home() {
             <img
               src="/calligraphy.jpg"
               alt="معهد التطوير التقني"
-              className="mt-6 h-auto w-full max-w-sm drop-shadow-2xl sm:max-w-md lg:max-w-lg"
+              className="mt-6 h-auto w-full max-w-sm drop-shadow-2xl sm:max-w-md lg:max-w-lg ltr:ml-auto rtl:mr-auto"
             />
-            <p className="mt-5 max-w-xl text-xs leading-relaxed text-navy-100 sm:text-sm">
+            <p className="mt-5 max-w-xl text-xs leading-relaxed text-navy-100 sm:text-sm ltr:ml-auto rtl:mr-auto">
               {t("home.heroSubtitle")}
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-8 flex flex-wrap items-center gap-3 ltr:justify-end rtl:justify-start">
               <Link to="/register" className="btn btn-primary">{pick(CTA.btn)}</Link>
               <Link to="/programs" className="btn btn-outline border-white/30 text-white hover:bg-white/10">{t("home.heroCta")}</Link>
             </div>
-            <div className="mt-7 flex items-center gap-2.5 text-sm text-navy-100">
+            <div className="mt-7 flex items-center gap-2.5 text-sm text-navy-100 ltr:justify-end rtl:justify-start">
               <span className="text-base tracking-wide text-brand-300">★★★★★</span>
               <span>{pick(HERO.rating)}</span>
             </div>
