@@ -183,42 +183,51 @@ body {
 }
 
 /* Hexagon honeycomb gallery (design 2) ----------------------------- */
+/* Staggered, interlocking rows: each row is offset so the points nest
+   into the notches of the row above. Odd rows shift by half a hexagon. */
 .honeycomb {
-  --hs: 210px; /* hex width */
-  --hm: 5px; /* gap */
-  --hf: calc(1.732 * var(--hs) + 4 * var(--hm) - 1px);
-  font-size: 0;
+  --hs: 200px; /* hexagon width */
+  --hm: 8px; /* gap between hexagons */
+  --hh: calc(var(--hs) * 1.1547); /* pointy-top hex height */
+  width: fit-content;
   margin: 0 auto;
+  perspective: 1000px;
 }
-.honeycomb::before {
-  content: "";
-  width: calc(var(--hs) / 2 + var(--hm));
-  float: left;
-  height: 120%;
-  shape-outside: repeating-linear-gradient(
-    #0000 0 calc(var(--hf) - 3px),
-    #000 0 var(--hf)
-  );
+.hex-row {
+  display: flex;
+  gap: var(--hm);
+}
+/* Pull each row up so the hexagon points interlock vertically (~25%). */
+.hex-row + .hex-row {
+  margin-top: calc(var(--hh) * -0.25 + var(--hm) * 0.5);
+}
+/* Shift alternating rows by half a hexagon so edges nest, not stack. */
+.hex-row-offset {
+  margin-left: calc((var(--hs) + var(--hm)) / 2);
 }
 .hex {
   width: var(--hs);
-  height: calc(var(--hs) * 1.1547);
-  margin: var(--hm);
-  margin-bottom: calc(var(--hm) - var(--hs) * 0.2885);
-  display: inline-block;
-  font-size: initial;
+  height: var(--hh);
+  flex: 0 0 auto;
   position: relative;
   overflow: hidden;
   cursor: pointer;
   background: #0b1220;
   clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
-  transition: filter 0.35s ease;
+  transition: transform 0.18s ease, filter 0.35s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.hex:hover {
+  z-index: 5;
+  filter: drop-shadow(0 12px 18px rgba(212, 175, 55, 0.55));
 }
 .hex img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.55s ease;
+  transition: transform 0.2s ease;
+  will-change: transform;
 }
 .hex-cap {
   position: absolute;
@@ -234,17 +243,12 @@ body {
   color: #fff;
   background: linear-gradient(
     180deg,
-    rgba(11, 18, 32, 0.35),
+    rgba(11, 18, 32, 0.25),
     rgba(11, 18, 32, 0.78)
   );
   opacity: 0;
   transition: opacity 0.35s ease;
-}
-.hex:hover {
-  filter: drop-shadow(0 10px 16px rgba(212, 175, 55, 0.5));
-}
-.hex:hover img {
-  transform: scale(1.12);
+  pointer-events: none;
 }
 .hex:hover .hex-cap {
   opacity: 1;
@@ -264,7 +268,7 @@ body {
 }
 @media (max-width: 520px) {
   .honeycomb {
-    --hs: 124px;
+    --hs: 132px;
   }
   .hex-cap {
     font-size: 10px;
