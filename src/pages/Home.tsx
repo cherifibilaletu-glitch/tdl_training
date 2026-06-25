@@ -8,7 +8,7 @@ import { STATS, DOMAINS, PROGRAMS } from "../data/site";
 import { WHY_US } from "../data/about";
 
 const img = (id: string) =>
-  "https://images.unsplash.com/" + id + "?auto=format&fit=crop&w=1400&q=80";
+  "https://images.unsplash.com/photo-" + id + "?auto=format&fit=crop&w=1400&q=80";
 
 const DOMAIN_IMGS = [
   "1454165804606-c3d57bc86b40",
