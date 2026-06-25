@@ -33,14 +33,14 @@ const HERO_IMG =
   "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=2000&q=80";
 
 const inputClass =
-  "w-full rounded-xl border border-navy-200 bg-white px-4 py-2.5 text-sm text-navy-900 shadow-sm outline-none transition placeholder:text-navy-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100 dark:border-navy-700 dark:bg-navy-900 dark:text-white dark:focus:ring-brand-900/30";
+  "w-full rounded-lg border border-navy-200 bg-white px-4 py-2.5 text-sm text-navy-900 outline-none transition placeholder:text-navy-400 focus:border-navy-500 focus:ring-2 focus:ring-navy-200 dark:border-navy-700 dark:bg-navy-900 dark:text-white dark:focus:ring-navy-700";
 const labelClass =
   "mb-1.5 flex items-center gap-1 text-sm font-medium text-navy-700 dark:text-navy-200";
 const errClass = inputClass + " border-red-400 focus:border-red-500 focus:ring-red-100";
 
 type Opt = { value: string; label: string };
 
-function Section1({
+function FormSection({
   step,
   icon,
   title,
@@ -54,12 +54,12 @@ function Section1({
   children: ReactNode;
 }) {
   return (
-    <div className="card p-6 sm:p-8">
+    <div className="border-t border-navy-100 pt-8 dark:border-navy-800">
       <div className="mb-6 flex items-start gap-4">
-        <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-brand-600 text-base font-bold text-white">{step}</span>
+        <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full border border-navy-300 text-sm font-semibold text-navy-700 dark:border-navy-600 dark:text-navy-200">{step}</span>
         <div>
           <h2 className="flex items-center gap-2 text-lg font-semibold text-navy-900 dark:text-white">
-            <span className="text-brand-600 dark:text-brand-400">{icon}</span>
+            <span className="text-navy-400">{icon}</span>
             <span>{title}</span>
           </h2>
           <p className="muted mt-0.5 text-sm">{subtitle}</p>
@@ -86,7 +86,7 @@ function Field(props: {
     <div className={props.full ? "sm:col-span-2" : ""} data-error={props.error ? "true" : "false"}>
       <label className={labelClass}>
         <span>{props.label}</span>
-        {props.required ? <span className="text-red-500">*</span> : null}
+        {props.required ? <span className="text-navy-400">*</span> : null}
       </label>
       <input
         type={props.type || "text"}
@@ -116,7 +116,7 @@ function Picker(props: {
     <div className={props.full ? "sm:col-span-2" : ""} data-error={props.error ? "true" : "false"}>
       <label className={labelClass}>
         <span>{props.label}</span>
-        {props.required ? <span className="text-red-500">*</span> : null}
+        {props.required ? <span className="text-navy-400">*</span> : null}
       </label>
       <div className="relative">
         <select
@@ -291,13 +291,13 @@ export default function Register() {
         <PageHero image={HERO_IMG} eyebrow={pick(RT.eyebrow)} title={pick(RT.successTitle)} />
         <Section>
           <Reveal className="mx-auto max-w-2xl text-center">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400">
-              <CheckCircle2 className="h-9 w-9" />
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-navy-200 text-navy-700 dark:border-navy-700 dark:text-navy-200">
+              <CheckCircle2 className="h-8 w-8" />
             </div>
             <h2 className="mt-6 text-2xl font-bold text-navy-900 dark:text-white">{pick(RT.successTitle)}</h2>
             <p className="muted mx-auto mt-3 max-w-xl text-sm leading-relaxed sm:text-base">{pick(RT.successMsg)}</p>
             {waLink ? (
-              <div className="mx-auto mt-6 max-w-md rounded-xl border border-brand-100 bg-brand-50/70 p-4 text-sm text-navy-700 dark:border-navy-800 dark:bg-navy-900 dark:text-navy-100">
+              <div className="mx-auto mt-6 max-w-md rounded-lg border border-navy-200 bg-navy-50 p-4 text-sm text-navy-700 dark:border-navy-800 dark:bg-navy-900 dark:text-navy-100">
                 {pick(RT.waNote)}
               </div>
             ) : null}
@@ -320,26 +320,24 @@ export default function Register() {
     <>
       <PageHero image={HERO_IMG} eyebrow={pick(RT.eyebrow)} title={pick(RT.title)} subtitle={pick(RT.subtitle)} />
 
-      <section className="border-b border-navy-100 bg-white dark:border-navy-800 dark:bg-navy-950">
-        <div className="container-tdi grid grid-cols-1 gap-x-6 gap-y-4 py-8 sm:grid-cols-3">
-          <Reveal className="flex items-center gap-3">
-            <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-navy-800 dark:text-brand-400"><ShieldCheck className="h-5 w-5" /></span>
-            <span className="text-sm font-medium text-navy-700 dark:text-navy-100">{pick(RT.trustSecure)}</span>
-          </Reveal>
-          <Reveal delay={0.05} className="flex items-center gap-3">
-            <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-navy-800 dark:text-brand-400"><Clock className="h-5 w-5" /></span>
-            <span className="text-sm font-medium text-navy-700 dark:text-navy-100">{pick(RT.trustFast)}</span>
-          </Reveal>
-          <Reveal delay={0.1} className="flex items-center gap-3">
-            <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-navy-800 dark:text-brand-400"><BadgeCheck className="h-5 w-5" /></span>
-            <span className="text-sm font-medium text-navy-700 dark:text-navy-100">{pick(RT.trustFree)}</span>
-          </Reveal>
-        </div>
-      </section>
-
       <Section>
-        <form onSubmit={handleSubmit} noValidate className="mx-auto max-w-3xl space-y-6">
-          <Section1 step="1" icon={<User className="h-5 w-5" />} title={pick(RT.sec1)} subtitle={pick(RT.sec1sub)}>
+        <div className="mx-auto mb-10 grid max-w-3xl grid-cols-1 gap-x-6 gap-y-4 border-b border-navy-100 pb-8 sm:grid-cols-3 dark:border-navy-800">
+          <div className="flex items-center gap-2.5 text-sm text-navy-600 dark:text-navy-200">
+            <ShieldCheck className="h-5 w-5 flex-none text-navy-400" />
+            <span>{pick(RT.trustSecure)}</span>
+          </div>
+          <div className="flex items-center gap-2.5 text-sm text-navy-600 dark:text-navy-200">
+            <Clock className="h-5 w-5 flex-none text-navy-400" />
+            <span>{pick(RT.trustFast)}</span>
+          </div>
+          <div className="flex items-center gap-2.5 text-sm text-navy-600 dark:text-navy-200">
+            <BadgeCheck className="h-5 w-5 flex-none text-navy-400" />
+            <span>{pick(RT.trustFree)}</span>
+          </div>
+        </div>
+
+        <form onSubmit={handleSubmit} noValidate className="mx-auto max-w-3xl space-y-8">
+          <FormSection step="1" icon={<User className="h-5 w-5" />} title={pick(RT.sec1)} subtitle={pick(RT.sec1sub)}>
             <div className="grid gap-5 sm:grid-cols-2">
               <Field label={pick(RT.firstName)} value={form.firstName} onChange={(v) => set("firstName", v)} required error={errors.firstName} errText={req} />
               <Field label={pick(RT.lastName)} value={form.lastName} onChange={(v) => set("lastName", v)} required error={errors.lastName} errText={req} />
@@ -347,28 +345,28 @@ export default function Register() {
               <Picker label={pick(RT.gender)} value={form.gender} onChange={(v) => set("gender", v)} placeholder={pick(RT.choose)} errText={req} options={[{ value: "male", label: pick(RT.male) }, { value: "female", label: pick(RT.female) }]} />
               <Picker full label={pick(RT.education)} value={form.education} onChange={(v) => set("education", v)} placeholder={pick(RT.choose)} errText={req} options={levels.map((l) => ({ value: l.key, label: pick(l.label) }))} />
             </div>
-          </Section1>
+          </FormSection>
 
-          <Section1 step="2" icon={<Phone className="h-5 w-5" />} title={pick(RT.sec2)} subtitle={pick(RT.sec2sub)}>
+          <FormSection step="2" icon={<Phone className="h-5 w-5" />} title={pick(RT.sec2)} subtitle={pick(RT.sec2sub)}>
             <div className="grid gap-5 sm:grid-cols-2">
               <Field label={pick(RT.phone)} type="tel" dir="ltr" placeholder="+213 ..." value={form.phone} onChange={(v) => set("phone", v)} required error={errors.phone} errText={req} />
               <Field label={pick(RT.email)} type="email" dir="ltr" placeholder="example@email.com" value={form.email} onChange={(v) => set("email", v)} errText={req} />
               <Field label={pick(RT.city)} value={form.city} onChange={(v) => set("city", v)} required error={errors.city} errText={req} />
               <Field label={pick(RT.address)} value={form.address} onChange={(v) => set("address", v)} errText={req} />
             </div>
-          </Section1>
+          </FormSection>
 
-          <Section1 step="3" icon={<GraduationCap className="h-5 w-5" />} title={pick(RT.sec3)} subtitle={pick(RT.sec3sub)}>
+          <FormSection step="3" icon={<GraduationCap className="h-5 w-5" />} title={pick(RT.sec3)} subtitle={pick(RT.sec3sub)}>
             <div className="grid gap-5 sm:grid-cols-2">
               <Picker label={pick(RT.domain)} value={form.domain} onChange={onDomain} placeholder={pick(RT.choose)} errText={req} options={domains.map((d) => ({ value: d.key, label: pick(d.label) }))} />
               <Picker label={pick(RT.program)} value={form.program} onChange={(v) => set("program", v)} placeholder={pick(RT.choose)} required error={errors.program} errText={req} options={availablePrograms.map((p) => ({ value: p.id, label: pick(p.title) }))} />
               <Picker full label={pick(RT.schedule)} value={form.schedule} onChange={(v) => set("schedule", v)} placeholder={pick(RT.choose)} errText={req} options={[{ value: "morning", label: pick(RT.morning) }, { value: "evening", label: pick(RT.evening) }, { value: "weekend", label: pick(RT.weekend) }]} />
             </div>
-          </Section1>
+          </FormSection>
 
-          <Section1 step="4" icon={<FileText className="h-5 w-5" />} title={pick(RT.sec4)} subtitle={pick(RT.sec4sub)}>
-            <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-navy-200 bg-navy-50/50 px-6 py-10 text-center transition hover:border-brand-400 hover:bg-brand-50/40 dark:border-navy-700 dark:bg-navy-900/40">
-              <UploadCloud className="h-8 w-8 text-brand-500" />
+          <FormSection step="4" icon={<FileText className="h-5 w-5" />} title={pick(RT.sec4)} subtitle={pick(RT.sec4sub)}>
+            <label className="flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-navy-200 px-6 py-10 text-center transition hover:border-navy-400 hover:bg-navy-50 dark:border-navy-700 dark:hover:bg-navy-900/40">
+              <UploadCloud className="h-8 w-8 text-navy-400" />
               <span className="mt-3 text-sm font-medium text-navy-700 dark:text-navy-100">{pick(RT.dropFiles)}</span>
               <span className="muted mt-1 text-xs">{pick(RT.fileHint)}</span>
               <input type="file" multiple accept="image/*,application/pdf" onChange={(e) => onFiles(e.target.files)} className="hidden" />
@@ -376,12 +374,12 @@ export default function Register() {
             {files.length > 0 ? (
               <ul className="mt-4 space-y-2">
                 {files.map((file, i) => (
-                  <li key={i} className="flex items-center justify-between gap-3 rounded-lg border border-navy-100 bg-white px-3 py-2 text-sm dark:border-navy-800 dark:bg-navy-900">
+                  <li key={i} className="flex items-center justify-between gap-3 rounded-lg border border-navy-100 px-3 py-2 text-sm dark:border-navy-800">
                     <span className="flex items-center gap-2 truncate text-navy-700 dark:text-navy-100">
-                      <FileText className="h-4 w-4 flex-none text-brand-500" />
+                      <FileText className="h-4 w-4 flex-none text-navy-400" />
                       <span className="truncate">{file.name}</span>
                     </span>
-                    <button type="button" onClick={() => removeFile(i)} aria-label="remove" className="flex-none rounded-md p-1 text-navy-400 transition hover:bg-navy-100 hover:text-red-500 dark:hover:bg-navy-800">
+                    <button type="button" onClick={() => removeFile(i)} aria-label="remove" className="flex-none rounded-md p-1 text-navy-400 transition hover:text-red-500">
                       <X className="h-4 w-4" />
                     </button>
                   </li>
@@ -392,11 +390,11 @@ export default function Register() {
               <label className={labelClass}>{pick(RT.notes)}</label>
               <textarea rows={3} value={form.notes} onChange={(e) => set("notes", e.target.value)} className={inputClass} />
             </div>
-          </Section1>
+          </FormSection>
 
-          <div className="card p-6 sm:p-8">
+          <div className="border-t border-navy-100 pt-8 dark:border-navy-800">
             <label className="flex cursor-pointer items-start gap-3">
-              <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-1 h-4 w-4 flex-none rounded border-navy-300 text-brand-600 focus:ring-brand-500" />
+              <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-1 h-4 w-4 flex-none rounded border-navy-300 text-navy-700 focus:ring-navy-400" />
               <span className="text-sm leading-relaxed text-navy-600 dark:text-navy-200">{pick(RT.consent)}</span>
             </label>
             {errors.consent ? <p className="mt-2 text-xs text-red-500">{pick(RT.consentRequired)}</p> : null}
