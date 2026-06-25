@@ -73,6 +73,16 @@ const TRUST = [
   },
 ];
 
+const ORBIT = {
+  center: { ar: "اختر مجالك", fr: "Choisissez votre domaine", en: "Choose your field" },
+  sub: { ar: "مرّر للإيقاف", fr: "Survolez pour arrêter", en: "Hover to stop" },
+  hint: {
+    ar: "الدائرة تدور — مرّر فوقها لتتوقّف ثم اختر المجال المناسب",
+    fr: "Le cercle tourne — survolez-le pour l'arrêter, puis choisissez votre domaine",
+    en: "The circle rotates — hover to stop it, then pick your domain",
+  },
+};
+
 const WHYUS_HEAD = {
   eyebrow: { ar: "لماذا نحن", fr: "Pourquoi nous", en: "Why us" },
   title: { ar: "لماذا تختار معهد التطوير التقني؟", fr: "Pourquoi choisir TDI ?", en: "Why choose TDI?" },
@@ -136,6 +146,7 @@ export default function Home() {
   const { pick } = useLang();
   const domains = DOMAINS.filter((d) => d.key !== "all");
   const featured = PROGRAMS.slice(0, 6);
+  const step = 360 / domains.length;
 
   return (
     <>
@@ -197,23 +208,36 @@ export default function Home() {
 
       <Section>
         <SectionHeader eyebrow={t("home.domainsEyebrow")} title={t("home.domainsTitle")} subtitle={t("home.domainsSubtitle")} center />
-        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {domains.map((d, i) => (
-            <Reveal key={d.key} delay={i * 0.04}>
-              <Link
-                to={"/domains/" + d.key}
-                className="group relative flex h-36 items-end overflow-hidden rounded-2xl shadow-soft"
-              >
-                <img
-                  src={img(DOMAIN_IMGS[i % DOMAIN_IMGS.length])}
-                  alt=""
-                  className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/45 to-transparent" />
-                <span className="relative z-10 p-4 text-sm font-semibold leading-snug text-white">{pick(d.label)}</span>
-              </Link>
-            </Reveal>
-          ))}
+        <p className="muted mx-auto mt-3 max-w-md text-center text-xs">{pick(ORBIT.hint)}</p>
+        <Reveal className="mt-4 flex justify-center">
+          <div className="orbit-stop relative aspect-square w-full max-w-lg scale-[0.72] sm:scale-90 lg:scale-100">
+            <div className="absolute left-1/2 top-1/2 z-20 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-navy-800 p-4 text-center text-white shadow-card dark:bg-brand-600">
+              <span className="text-sm font-bold leading-tight">{pick(ORBIT.center)}</span>
+              <span className="mt-1 text-[10px] text-navy-200">{pick(ORBIT.sub)}</span>
+            </div>
+            <div className="orbit-spin absolute inset-0">
+              {domains.map((d, i) => (
+                <div
+                  key={d.key}
+                  className="absolute left-1/2 top-1/2"
+                  style={ { transform: "rotate(" + step * i + "deg) translateY(-185px) rotate(" + -step * i + "deg)" } }
+                >
+                  <Link
+                    to={"/domains/" + d.key}
+                    className="orbit-spin-rev group/badge -ml-12 -mt-14 flex w-24 flex-col items-center gap-2"
+                  >
+                    <span className="block h-16 w-16 overflow-hidden rounded-full ring-2 ring-white shadow-soft transition duration-300 hover:scale-110 hover:ring-brand-400 dark:ring-navy-800 sm:h-20 sm:w-20">
+                      <img src={img(DOMAIN_IMGS[i % DOMAIN_IMGS.length])} alt="" className="h-full w-full object-cover" />
+                    </span>
+                    <span className="max-w-[6rem] text-center text-[11px] font-medium leading-tight text-navy-700 dark:text-navy-100">{pick(d.label)}</span>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+        <div className="mt-6 text-center">
+          <Link to="/programs" className="link-quiet text-sm">{t("common.viewAll")}</Link>
         </div>
       </Section>
 
