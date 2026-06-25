@@ -12,10 +12,7 @@ export const LANGS = {
 
 export type LangCode = keyof typeof LANGS;
 
-// Belt-and-suspenders: previous builds used i18next-browser-languagedetector,
-// which stored a chosen language under "tdi_lang" (and i18next's own keys).
-// Wipe those before init so every fresh page load starts in Arabic for
-// everyone, regardless of browser language or any leftover preference.
+// Clear any language stored by previous builds so we start fresh.
 if (typeof window !== "undefined") {
   try {
     localStorage.removeItem("tdi_lang");
@@ -41,23 +38,20 @@ i18n
     interpolation: { escapeValue: false },
   });
 
-// Defensive: force Arabic again right after init in case anything else
-// (browser extension, future detector, etc.) tries to change it on boot.
-if (i18n.language !== "ar") {
-  i18n.changeLanguage("ar");
-}
-
-function applyDir(lng: string) {
+// Layout is locked to RTL in every language. Switching languages only
+// changes the translated text; the page layout stays exactly the same.
+// We keep the `lang` attribute and `lang-*` class so per-language fonts
+// (Tajawal/Cairo for Arabic, Inter for FR/EN) still apply correctly.
+function applyLang(lng: string) {
   const code = (lng in LANGS ? lng : "ar") as LangCode;
-  const { dir } = LANGS[code];
   const html = document.documentElement;
   html.setAttribute("lang", code);
-  html.setAttribute("dir", dir);
+  html.setAttribute("dir", "rtl");
   html.classList.remove("lang-ar", "lang-fr", "lang-en");
   html.classList.add(`lang-${code}`);
 }
 
-applyDir(i18n.language);
-i18n.on("languageChanged", applyDir);
+applyLang(i18n.language);
+i18n.on("languageChanged", applyLang);
 
 export default i18n;
