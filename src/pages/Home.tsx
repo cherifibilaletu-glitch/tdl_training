@@ -5,8 +5,10 @@ import Reveal from "../components/Reveal";
 import Icon from "../components/Icon";
 import SectorCoverflow from "../components/SectorCoverflow";
 import ProgramsMagazine from "../components/ProgramsMagazine";
+import HexGallery from "../components/HexGallery";
 import { useLang } from "../lib/useLang";
 import { STATS, DOMAINS, PROGRAMS } from "../data/site";
+import { GALLERY as GALLERY_PHOTOS } from "../data/gallery";
 import { WHY_US } from "../data/about";
 
 const img = (id: string) =>
@@ -20,15 +22,6 @@ const DOMAIN_IMGS = [
   "1456513080510-7bf3a84b82f8",
   "1427504494785-3a9ca7044f45",
   "1543269865-cbf427effbad",
-];
-
-const GALLERY = [
-  "1523240795612-9a054b0db644",
-  "1454165804606-c3d57bc86b40",
-  "1497032628192-86f99bcd76bc",
-  "1456513080510-7bf3a84b82f8",
-  "1521737711867-e3b97375f902",
-  "1427504494785-3a9ca7044f45",
 ];
 
 const GAL_HEAD = {
@@ -123,6 +116,7 @@ export default function Home() {
   const { pick } = useLang();
   const domains = DOMAINS.filter((d) => d.key !== "all");
   const featured = PROGRAMS.slice(0, 6);
+  const homeGallery = GALLERY_PHOTOS.slice(0, 9);
 
   return (
     <>
@@ -220,18 +214,11 @@ export default function Home() {
 
       <Section>
         <SectionHeader eyebrow={pick(GAL_HEAD.eyebrow)} title={pick(GAL_HEAD.title)} subtitle={pick(GAL_HEAD.subtitle)} center />
-        <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
-          {GALLERY.map((id, i) => (
-            <Reveal key={id} delay={i * 0.05}>
-              <div className="group overflow-hidden rounded-2xl shadow-soft">
-                <img
-                  src={img(id)}
-                  alt=""
-                  className="h-40 w-full object-cover transition duration-700 group-hover:scale-110 sm:h-48"
-                />
-              </div>
-            </Reveal>
-          ))}
+        <Reveal className="mt-10">
+          <HexGallery items={homeGallery} />
+        </Reveal>
+        <div className="mt-8 flex justify-center">
+          <Link to="/gallery" className="btn btn-outline">{t("common.viewAll")}</Link>
         </div>
       </Section>
 
