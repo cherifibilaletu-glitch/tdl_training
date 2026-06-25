@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Section, SectionHeader } from "../components/Section";
@@ -75,8 +74,6 @@ const TRUST = [
 ];
 
 const ORBIT = {
-  stop: { ar: "اضغط للإيقاف", fr: "Cliquez pour arrêter", en: "Click to stop" },
-  play: { ar: "اضغط للتدوير", fr: "Cliquez pour tourner", en: "Click to spin" },
   browse: { ar: "تصفّح كل البرامج", fr: "Voir tous les programmes", en: "Browse all programs" },
 };
 
@@ -88,9 +85,9 @@ const ORBIT_INFO = {
     en: "Pick your field and start your career",
   },
   body: {
-    ar: "نغطّي أكثر القطاعات طلباً في سوق العمل عبر عدّة مجالات تكوينية. أوقف الدائرة بالضغط على الشعار في الوسط، ثم اضغط على المجال الذي يناسبك لاكتشاف برامجه.",
-    fr: "Nous couvrons les secteurs les plus demandés à travers plusieurs domaines de formation. Arrêtez le cercle en cliquant sur le logo au centre, puis cliquez sur le domaine qui vous intéresse pour découvrir ses programmes.",
-    en: "We cover the most in-demand sectors across several training domains. Stop the circle by clicking the logo in the center, then click the field that interests you to explore its programs.",
+    ar: "نغطّي أكثر القطاعات طلباً في سوق العمل عبر عدّة مجالات تكوينية. اضغط على المجال الذي يناسبك لاكتشاف برامجه.",
+    fr: "Nous couvrons les secteurs les plus demandés à travers plusieurs domaines de formation. Cliquez sur le domaine qui vous intéresse pour découvrir ses programmes.",
+    en: "We cover the most in-demand sectors across several training domains. Click the field that interests you to explore its programs.",
   },
   points: [
     { icon: "target", label: { ar: "مجالات تكوينية متخصصة", fr: "Des domaines de formation spécialisés", en: "Specialized training domains" } },
@@ -160,7 +157,6 @@ const TESTIMONIALS = [
 export default function Home() {
   const { t } = useTranslation();
   const { pick } = useLang();
-  const [spinning, setSpinning] = useState(true);
   const domains = DOMAINS.filter((d) => d.key !== "all");
   const featured = PROGRAMS.slice(0, 6);
   const step = 360 / domains.length;
@@ -246,7 +242,7 @@ export default function Home() {
           </Reveal>
 
           <Reveal className="flex justify-center">
-            <div className={"orbit-3d relative aspect-square w-full max-w-md scale-[0.72] [perspective:1100px] sm:max-w-lg sm:scale-90 lg:scale-100 " + (spinning ? "" : "orbit-paused")}>
+            <div className="orbit-3d relative aspect-square w-full max-w-md scale-[0.72] [perspective:1100px] sm:max-w-lg sm:scale-90 lg:scale-100">
               <div className="absolute inset-0 [transform:rotateX(18deg)] [transform-style:preserve-3d]">
                 <div className="orbit-spin absolute inset-0 [transform-style:preserve-3d]">
                   {domains.map((d, i) => (
@@ -270,20 +266,6 @@ export default function Home() {
                   ))}
                 </div>
               </div>
-              <button
-                type="button"
-                onClick={() => setSpinning((s) => !s)}
-                aria-label="TDI"
-                className="absolute left-1/2 top-1/2 z-30 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-navy-100 bg-white text-center shadow-card transition hover:scale-105 dark:border-navy-700 dark:bg-navy-900"
-              >
-                <span className="inline-flex items-center gap-1.5">
-                  <span className="text-lg font-extrabold tracking-tight text-navy-900 dark:text-white">TDI</span>
-                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-brand-400 to-brand-700 shadow-soft">
-                    <span className="text-[9px] font-extrabold text-white">TDI</span>
-                  </span>
-                </span>
-                <span className="mt-1.5 text-[10px] font-semibold text-navy-400 dark:text-navy-300">{pick(spinning ? ORBIT.stop : ORBIT.play)}</span>
-              </button>
             </div>
           </Reveal>
         </div>
