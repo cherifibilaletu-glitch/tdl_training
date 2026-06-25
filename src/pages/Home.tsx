@@ -75,14 +75,28 @@ const TRUST = [
 ];
 
 const ORBIT = {
-  center: { ar: "اختر مجالك", fr: "Votre domaine", en: "Choose your field" },
   stop: { ar: "اضغط للإيقاف", fr: "Cliquez pour arrêter", en: "Click to stop" },
   play: { ar: "اضغط للتدوير", fr: "Cliquez pour tourner", en: "Click to spin" },
-  hint: {
-    ar: "الدائرة تدور بثلاثية الأبعاد — اضغط على الزر في الوسط لإيقافها ثم اختر مجالك",
-    fr: "Le cercle tourne en 3D — cliquez sur le bouton central pour l'arrêter, puis choisissez votre domaine",
-    en: "The circle spins in 3D — click the center button to stop it, then pick your domain",
+  browse: { ar: "تصفّح كل البرامج", fr: "Voir tous les programmes", en: "Browse all programs" },
+};
+
+const ORBIT_INFO = {
+  eyebrow: { ar: "مجالاتنا", fr: "Nos domaines", en: "Our domains" },
+  title: {
+    ar: "اختر مجالك وابدأ مسارك المهني",
+    fr: "Choisissez votre domaine et lancez votre carrière",
+    en: "Pick your field and start your career",
   },
+  body: {
+    ar: "نغطّي أكثر القطاعات طلباً في سوق العمل عبر عدّة مجالات تكوينية. أوقف الدائرة بالضغط على الشعار في الوسط، ثم اضغط على المجال الذي يناسبك لاكتشاف برامجه.",
+    fr: "Nous couvrons les secteurs les plus demandés à travers plusieurs domaines de formation. Arrêtez le cercle en cliquant sur le logo au centre, puis cliquez sur le domaine qui vous intéresse pour découvrir ses programmes.",
+    en: "We cover the most in-demand sectors across several training domains. Stop the circle by clicking the logo in the center, then click the field that interests you to explore its programs.",
+  },
+  points: [
+    { icon: "target", label: { ar: "مجالات تكوينية متخصصة", fr: "Des domaines de formation spécialisés", en: "Specialized training domains" } },
+    { icon: "badge-check", label: { ar: "شهادات معتمدة رسمياً", fr: "Certificats officiellement reconnus", en: "Officially accredited certificates" } },
+    { icon: "briefcase", label: { ar: "برامج موجّهة نحو سوق العمل", fr: "Des programmes orientés vers l'emploi", en: "Programs geared toward employment" } },
+  ],
 };
 
 const WHYUS_HEAD = {
@@ -210,45 +224,68 @@ export default function Home() {
       </Section>
 
       <Section>
-        <SectionHeader eyebrow={t("home.domainsEyebrow")} title={t("home.domainsTitle")} subtitle={t("home.domainsSubtitle")} center />
-        <p className="muted mx-auto mt-3 max-w-md text-center text-xs">{pick(ORBIT.hint)}</p>
-        <Reveal className="mt-2 flex justify-center">
-          <div className={"orbit-3d relative aspect-square w-full max-w-lg scale-[0.7] [perspective:1100px] sm:scale-90 lg:scale-100 " + (spinning ? "" : "orbit-paused")}>
-            <div className="absolute inset-0 [transform:rotateX(18deg)] [transform-style:preserve-3d]">
-              <div className="orbit-spin absolute inset-0 [transform-style:preserve-3d]">
-                {domains.map((d, i) => (
-                  <div
-                    key={d.key}
-                    className="absolute left-1/2 top-1/2 [transform-style:preserve-3d]"
-                    style={ { transform: "rotate(" + step * i + "deg) translateY(-185px) rotate(" + -step * i + "deg)" } }
-                  >
-                    <div className="orbit-spin-rev [transform-style:preserve-3d]">
-                      <Link
-                        to={"/domains/" + d.key}
-                        className="-ml-12 -mt-14 block w-24 [transform:rotateX(-18deg)] [transform-style:preserve-3d] transition-transform duration-300 hover:[transform:rotateX(-18deg)_translateZ(55px)_scale(1.08)]"
-                      >
-                        <span className="mx-auto block h-16 w-16 overflow-hidden rounded-full ring-2 ring-white shadow-card transition hover:ring-brand-400 dark:ring-navy-800 sm:h-20 sm:w-20">
-                          <img src={img(DOMAIN_IMGS[i % DOMAIN_IMGS.length])} alt="" className="h-full w-full object-cover" />
-                        </span>
-                        <span className="mx-auto mt-2 block max-w-[6rem] text-center text-[11px] font-medium leading-tight text-navy-700 dark:text-navy-100">{pick(d.label)}</span>
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-              </div>
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
+          <Reveal>
+            <span className="eyebrow">{pick(ORBIT_INFO.eyebrow)}</span>
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-navy-900 dark:text-white sm:text-3xl">{pick(ORBIT_INFO.title)}</h2>
+            <p className="muted mt-4 text-sm leading-relaxed sm:text-base">{pick(ORBIT_INFO.body)}</p>
+            <ul className="mt-6 space-y-3">
+              {ORBIT_INFO.points.map((pt) => (
+                <li key={pt.label.en} className="flex items-center gap-3">
+                  <span className="flex h-9 w-9 flex-none items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-navy-800 dark:text-brand-400">
+                    <Icon name={pt.icon} className="h-5 w-5" />
+                  </span>
+                  <span className="text-sm font-medium text-navy-700 dark:text-navy-100">{pick(pt.label)}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link to="/programs" className="btn btn-primary">{pick(ORBIT.browse)}</Link>
+              <Link to="/register" className="btn btn-outline">{pick(CTA.btn)}</Link>
             </div>
-            <button
-              type="button"
-              onClick={() => setSpinning((s) => !s)}
-              className="absolute left-1/2 top-1/2 z-30 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-navy-800 p-4 text-center text-white shadow-card transition hover:bg-navy-700 dark:bg-brand-600 dark:hover:bg-brand-500"
-            >
-              <span className="text-sm font-bold leading-tight">{pick(ORBIT.center)}</span>
-              <span className="mt-1 text-[10px] text-navy-200">{pick(spinning ? ORBIT.stop : ORBIT.play)}</span>
-            </button>
-          </div>
-        </Reveal>
-        <div className="mt-6 text-center">
-          <Link to="/programs" className="link-quiet text-sm">{t("common.viewAll")}</Link>
+          </Reveal>
+
+          <Reveal className="flex justify-center">
+            <div className={"orbit-3d relative aspect-square w-full max-w-md scale-[0.72] [perspective:1100px] sm:max-w-lg sm:scale-90 lg:scale-100 " + (spinning ? "" : "orbit-paused")}>
+              <div className="absolute inset-0 [transform:rotateX(18deg)] [transform-style:preserve-3d]">
+                <div className="orbit-spin absolute inset-0 [transform-style:preserve-3d]">
+                  {domains.map((d, i) => (
+                    <div
+                      key={d.key}
+                      className="absolute left-1/2 top-1/2 [transform-style:preserve-3d]"
+                      style={ { transform: "rotate(" + step * i + "deg) translateY(-175px) rotate(" + -step * i + "deg)" } }
+                    >
+                      <div className="orbit-spin-rev [transform-style:preserve-3d]">
+                        <Link
+                          to={"/domains/" + d.key}
+                          className="-ml-12 -mt-14 block w-24 [transform:rotateX(-18deg)] [transform-style:preserve-3d] transition-transform duration-300 hover:[transform:rotateX(-18deg)_translateZ(55px)_scale(1.08)]"
+                        >
+                          <span className="mx-auto block h-16 w-16 overflow-hidden rounded-full ring-2 ring-white shadow-card transition hover:ring-brand-400 dark:ring-navy-800 sm:h-20 sm:w-20">
+                            <img src={img(DOMAIN_IMGS[i % DOMAIN_IMGS.length])} alt="" className="h-full w-full object-cover" />
+                          </span>
+                          <span className="mx-auto mt-2 block max-w-[6rem] text-center text-[11px] font-medium leading-tight text-navy-700 dark:text-navy-100">{pick(d.label)}</span>
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSpinning((s) => !s)}
+                aria-label="TDI"
+                className="absolute left-1/2 top-1/2 z-30 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-navy-100 bg-white text-center shadow-card transition hover:scale-105 dark:border-navy-700 dark:bg-navy-900"
+              >
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="text-lg font-extrabold tracking-tight text-navy-900 dark:text-white">TDI</span>
+                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-brand-400 to-brand-700 shadow-soft">
+                    <span className="text-[9px] font-extrabold text-white">TDI</span>
+                  </span>
+                </span>
+                <span className="mt-1.5 text-[10px] font-semibold text-navy-400 dark:text-navy-300">{pick(spinning ? ORBIT.stop : ORBIT.play)}</span>
+              </button>
+            </div>
+          </Reveal>
         </div>
       </Section>
 
