@@ -38,7 +38,7 @@ i18n
     interpolation: { escapeValue: false },
   });
 
-// Layout is locked to RTL in every language. Switching languages only
+// Layout is locked to LTR in every language. Switching languages only
 // changes the translated text; the page layout stays exactly the same.
 // We keep the `lang` attribute and `lang-*` class so per-language fonts
 // (Tajawal/Cairo for Arabic, Inter for FR/EN) still apply correctly.
@@ -46,7 +46,7 @@ function applyLang(lng: string) {
   const code = (lng in LANGS ? lng : "ar") as LangCode;
   const html = document.documentElement;
   html.setAttribute("lang", code);
-  html.setAttribute("dir", "rtl");
+  html.setAttribute("dir", "ltr");
   html.classList.remove("lang-ar", "lang-fr", "lang-en");
   html.classList.add(`lang-${code}`);
 }
