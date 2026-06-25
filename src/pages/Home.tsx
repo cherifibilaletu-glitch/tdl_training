@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Section, SectionHeader } from "../components/Section";
 import Reveal from "../components/Reveal";
 import Icon from "../components/Icon";
+import SectorCoverflow from "../components/SectorCoverflow";
 import { useLang } from "../lib/useLang";
 import { STATS, DOMAINS, PROGRAMS } from "../data/site";
 import { WHY_US } from "../data/about";
@@ -159,7 +160,6 @@ export default function Home() {
   const { pick } = useLang();
   const domains = DOMAINS.filter((d) => d.key !== "all");
   const featured = PROGRAMS.slice(0, 6);
-  const step = 360 / domains.length;
 
   return (
     <>
@@ -240,31 +240,7 @@ export default function Home() {
           </Reveal>
 
           <Reveal className="flex justify-center">
-            <div className="orbit-3d relative aspect-square w-full max-w-md scale-[0.72] [perspective:1100px] sm:max-w-lg sm:scale-90 lg:scale-100">
-              <div className="absolute inset-0 [transform:rotateX(18deg)] [transform-style:preserve-3d]">
-                <div className="orbit-spin absolute inset-0 [transform-style:preserve-3d]">
-                  {domains.map((d, i) => (
-                    <div
-                      key={d.key}
-                      className="absolute left-1/2 top-1/2 [transform-style:preserve-3d]"
-                      style={ { transform: "rotate(" + step * i + "deg) translateY(-175px) rotate(" + -step * i + "deg)" } }
-                    >
-                      <div className="orbit-spin-rev [transform-style:preserve-3d]">
-                        <Link
-                          to={"/domains/" + d.key}
-                          className="-ml-12 -mt-14 block w-24 [transform:rotateX(-18deg)] [transform-style:preserve-3d] transition-transform duration-300 hover:[transform:rotateX(-18deg)_translateZ(55px)_scale(1.08)]"
-                        >
-                          <span className="mx-auto block h-16 w-16 overflow-hidden rounded-full ring-2 ring-white shadow-card transition hover:ring-brand-400 dark:ring-navy-800 sm:h-20 sm:w-20">
-                            <img src={img(DOMAIN_IMGS[i % DOMAIN_IMGS.length])} alt="" className="h-full w-full object-cover" />
-                          </span>
-                          <span className="mx-auto mt-2 block max-w-[6rem] text-center text-[11px] font-medium leading-tight text-navy-700 dark:text-navy-100">{pick(d.label)}</span>
-                        </Link>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <SectorCoverflow domains={domains} images={DOMAIN_IMGS} />
           </Reveal>
         </div>
       </Section>
