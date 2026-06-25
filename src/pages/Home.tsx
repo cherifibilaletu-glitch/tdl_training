@@ -176,10 +176,12 @@ export default function Home() {
               <Icon name="badge-check" className="h-4 w-4 text-brand-300" />
               <span>{pick(HERO.badge)}</span>
             </span>
-            <h1 className="mt-5 text-3xl font-bold leading-tight tracking-tight text-white sm:text-5xl">
-              {t("home.heroTitle")}
-            </h1>
-            <p className="mt-5 max-w-2xl text-sm leading-relaxed text-navy-100 sm:text-base">
+            <img
+              src="/calligraphy.png"
+              alt="معهد التطوير التقني"
+              className="mt-6 h-auto w-full max-w-sm drop-shadow-2xl sm:max-w-md lg:max-w-lg"
+            />
+            <p className="mt-5 max-w-xl text-xs leading-relaxed text-navy-100 sm:text-sm">
               {t("home.heroSubtitle")}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
