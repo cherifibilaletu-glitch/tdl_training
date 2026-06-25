@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Section, SectionHeader } from "../components/Section";
 import Reveal from "../components/Reveal";
 import Icon from "../components/Icon";
-import CountUp from "../components/CountUp";
+import StatsHexagons from "../components/StatsHexagons";
 import SectorCoverflow from "../components/SectorCoverflow";
 import ProgramsMagazine from "../components/ProgramsMagazine";
 import HexGallery from "../components/HexGallery";
@@ -180,19 +180,9 @@ export default function Home() {
             <h2 className="mt-2 text-xl font-bold tracking-tight text-navy-900 dark:text-white sm:text-2xl">{pick(STATS_HEAD.title)}</h2>
           </Reveal>
 
-          <div className="mt-9 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
-            {STATS.map((s, i) => (
-              <Reveal key={s.value} delay={i * 0.1} className="group">
-                <div className="relative overflow-hidden rounded-2xl border border-navy-100/70 bg-white/60 px-4 py-8 text-center shadow-soft backdrop-blur transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-300/70 hover:shadow-card dark:border-navy-800 dark:bg-navy-900/50">
-                  <span className="pointer-events-none absolute inset-x-8 top-0 h-0.5 rounded-full bg-gradient-to-r from-transparent via-brand-400 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <div className="text-gold display text-4xl font-extrabold leading-none sm:text-5xl">
-                    <CountUp value={s.value} />
-                  </div>
-                  <div className="muted mt-2.5 text-xs font-medium sm:text-sm">{pick(s.label)}</div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal className="mt-12">
+            <StatsHexagons stats={STATS} />
+          </Reveal>
         </div>
       </section>
 
