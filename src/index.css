@@ -93,7 +93,7 @@ body {
   }
 }
 
-/* Rotating domain selector ----------------------------------------- */
+/* Rotating 3D domain selector -------------------------------------- */
 @keyframes orbitSpin {
   from {
     transform: rotate(0deg);
@@ -111,17 +111,17 @@ body {
   }
 }
 .orbit-spin {
-  animation: orbitSpin 48s linear infinite;
+  animation: orbitSpin 46s linear infinite;
   transform-origin: center;
   will-change: transform;
 }
 .orbit-spin-rev {
-  animation: orbitSpinRev 48s linear infinite;
+  animation: orbitSpinRev 46s linear infinite;
   transform-origin: center;
   will-change: transform;
 }
-.orbit-stop:hover .orbit-spin,
-.orbit-stop:hover .orbit-spin-rev {
+.orbit-paused .orbit-spin,
+.orbit-paused .orbit-spin-rev {
   animation-play-state: paused;
 }
 @media (prefers-reduced-motion: reduce) {
