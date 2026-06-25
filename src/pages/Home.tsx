@@ -4,6 +4,7 @@ import { Section, SectionHeader } from "../components/Section";
 import Reveal from "../components/Reveal";
 import Icon from "../components/Icon";
 import SectorCoverflow from "../components/SectorCoverflow";
+import ProgramsMagazine from "../components/ProgramsMagazine";
 import { useLang } from "../lib/useLang";
 import { STATS, DOMAINS, PROGRAMS } from "../data/site";
 import { WHY_US } from "../data/about";
@@ -56,22 +57,10 @@ const HERO = {
 };
 
 const TRUST = [
-  {
-    icon: "badge-check",
-    label: { ar: "شهادات معتمدة رسمياً", fr: "Certificats officiels", en: "Officially accredited" },
-  },
-  {
-    icon: "users",
-    label: { ar: "مدرّبون خبراء", fr: "Formateurs experts", en: "Expert trainers" },
-  },
-  {
-    icon: "briefcase",
-    label: { ar: "مرافقة نحو التوظيف", fr: "Accompagnement vers l'emploi", en: "Career support" },
-  },
-  {
-    icon: "building",
-    label: { ar: "فضاءات مجهّزة حديثاً", fr: "Locaux modernes équipés", en: "Modern equipped facilities" },
-  },
+  { icon: "badge-check", label: { ar: "شهادات معتمدة رسمياً", fr: "Certificats officiels", en: "Officially accredited" } },
+  { icon: "users", label: { ar: "مدرّبون خبراء", fr: "Formateurs experts", en: "Expert trainers" } },
+  { icon: "briefcase", label: { ar: "مرافقة نحو التوظيف", fr: "Accompagnement vers l'emploi", en: "Career support" } },
+  { icon: "building", label: { ar: "فضاءات مجهّزة حديثاً", fr: "Locaux modernes équipés", en: "Modern equipped facilities" } },
 ];
 
 const ORBIT = {
@@ -118,41 +107,15 @@ const CTA = {
   btn2: { ar: "تواصل معنا", fr: "Nous contacter", en: "Contact us" },
 };
 
-const MORE = { ar: "اعرف المزيد", fr: "En savoir plus", en: "Learn more" };
-
 const TESTI = {
   eyebrow: { ar: "آراء المتدربين", fr: "Témoignages", en: "Testimonials" },
   title: { ar: "ماذا يقول متدرّبونا", fr: "Ce que disent nos stagiaires", en: "What our trainees say" },
 };
 
 const TESTIMONIALS = [
-  {
-    name: "أمين",
-    role: { ar: "خرّيج محاسبة وتسيير", fr: "Diplômé Comptabilité & Gestion", en: "Accounting & Management graduate" },
-    quote: {
-      ar: "تكوين عملي ومدرّبون محترفون. وجدت عملاً بعد أشهر قليلة من تخرّجي.",
-      fr: "Formation pratique et formateurs professionnels. J'ai trouvé un emploi quelques mois après l'obtention de mon diplôme.",
-      en: "Practical training and professional trainers. I found a job a few months after graduating.",
-    },
-  },
-  {
-    name: "سارة",
-    role: { ar: "متدرّبة دورات اللغات", fr: "Stagiaire cours de langues", en: "Language courses trainee" },
-    quote: {
-      ar: "أجواء راقية ومنهجية واضحة. تحسّن مستواي في اللغة بشكل كبير.",
-      fr: "Une ambiance soignée et une méthode claire. Mon niveau de langue s'est nettement amélioré.",
-      en: "A refined atmosphere and a clear method. My language level improved significantly.",
-    },
-  },
-  {
-    name: "يوسف",
-    role: { ar: "خرّيج إعلام آلي", fr: "Diplômé Informatique", en: "IT graduate" },
-    quote: {
-      ar: "برامج محيّنة ومرافقة حقيقية. أنصح كل شاب يبحث عن مستقبل مهني.",
-      fr: "Des programmes à jour et un vrai accompagnement. Je le recommande à tout jeune ambitieux.",
-      en: "Up-to-date programs and real support. I recommend it to every ambitious young person.",
-    },
-  },
+  { name: "أمين", role: { ar: "خرّيج محاسبة وتسيير", fr: "Diplômé Comptabilité & Gestion", en: "Accounting & Management graduate" }, quote: { ar: "تكوين عملي ومدرّبون محترفون. وجدت عملاً بعد أشهر قليلة من تخرّجي.", fr: "Formation pratique et formateurs professionnels. J'ai trouvé un emploi quelques mois après l'obtention de mon diplôme.", en: "Practical training and professional trainers. I found a job a few months after graduating." } },
+  { name: "سارة", role: { ar: "متدرّبة دورات اللغات", fr: "Stagiaire cours de langues", en: "Language courses trainee" }, quote: { ar: "أجواء راقية ومنهجية واضحة. تحسّن مستواي في اللغة بشكل كبير.", fr: "Une ambiance soignée et une méthode claire. Mon niveau de langue s'est nettement amélioré.", en: "A refined atmosphere and a clear method. My language level improved significantly." } },
+  { name: "يوسف", role: { ar: "خرّيج إعلام آلي", fr: "Diplômé Informatique", en: "IT graduate" }, quote: { ar: "برامج محيّنة ومرافقة حقيقية. أنصح كل شاب يبحث عن مستقبل مهني.", fr: "Des programmes à jour et un vrai accompagnement. Je le recommande à tout jeune ambitieux.", en: "Up-to-date programs and real support. I recommend it to every ambitious young person." } },
 ];
 
 export default function Home() {
@@ -190,7 +153,7 @@ export default function Home() {
             </div>
           </Reveal>
         </div>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-white to-transparent dark:from-navy-950" />
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-white to-transparent dark:from-navy-950" />
       </section>
 
       <section className="border-b border-navy-100 bg-white dark:border-navy-800 dark:bg-navy-950">
@@ -245,35 +208,14 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section className="bg-navy-50/60 dark:bg-navy-900/40">
+      <Section className="bg-navy-100/40 dark:bg-navy-950">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <SectionHeader eyebrow={t("home.programsEyebrow")} title={t("home.programsTitle")} subtitle={t("home.programsSubtitle")} />
           <Link to="/programs" className="link-quiet whitespace-nowrap text-sm">{t("common.viewAll")}</Link>
         </div>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((p, i) => (
-            <Reveal key={p.id} delay={i * 0.04}>
-              <article className="card group h-full overflow-hidden p-0">
-                <div className="h-36 overflow-hidden">
-                  <img
-                    src={img(DOMAIN_IMGS[i % DOMAIN_IMGS.length])}
-                    alt=""
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-base font-semibold text-navy-900 dark:text-white">{pick(p.title)}</h3>
-                  <p className="muted mt-2 text-sm leading-relaxed line-clamp-3">{pick(p.desc)}</p>
-                  <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
-                    <span className="rounded-full bg-brand-50 px-2.5 py-1 font-medium text-brand-700 dark:bg-navy-800 dark:text-brand-300">{pick(p.duration)}</span>
-                    <span className="text-navy-500 dark:text-navy-300">{pick(p.price)}</span>
-                  </div>
-                  <Link to={"/domains/" + p.domain} className="link-quiet mt-4 inline-flex text-sm">{pick(MORE)}</Link>
-                </div>
-              </article>
-            </Reveal>
-          ))}
-        </div>
+        <Reveal className="mt-10">
+          <ProgramsMagazine programs={featured} images={DOMAIN_IMGS} />
+        </Reveal>
       </Section>
 
       <Section>
