@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Section, SectionHeader } from "../components/Section";
+import { Section } from "../components/Section";
+import PageHero from "../components/PageHero";
 import { useLang } from "../lib/useLang";
 import { FAQ_CATEGORIES, FAQS } from "../data/faq";
 
@@ -26,9 +27,12 @@ export default function Faq() {
 
   return (
     <>
-      <Section className="bg-navy-50/60 dark:bg-navy-900/40">
-        <SectionHeader eyebrow={t("faq.eyebrow")} title={t("faq.title")} subtitle={t("faq.subtitle")} center />
-      </Section>
+      <PageHero
+        image="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=2000&q=80"
+        eyebrow={t("faq.eyebrow")}
+        title={t("faq.title")}
+        subtitle={t("faq.subtitle")}
+      />
 
       <Section>
         <div className="mx-auto max-w-3xl">

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Section, SectionHeader } from "../components/Section";
+import { Section } from "../components/Section";
+import PageHero from "../components/PageHero";
 import Reveal from "../components/Reveal";
 import { useLang } from "../lib/useLang";
 import { DOMAINS, LEVELS, PROGRAMS } from "../data/site";
@@ -23,9 +24,12 @@ export default function Programs() {
 
   return (
     <>
-      <Section className="bg-navy-50/60 dark:bg-navy-900/40">
-        <SectionHeader eyebrow={t("programs.eyebrow")} title={t("programs.title")} subtitle={t("programs.subtitle")} center />
-      </Section>
+      <PageHero
+        image="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=2000&q=80"
+        eyebrow={t("programs.eyebrow")}
+        title={t("programs.title")}
+        subtitle={t("programs.subtitle")}
+      />
 
       <Section>
         <div className="space-y-5">

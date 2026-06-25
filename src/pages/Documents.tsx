@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { Section, SectionHeader } from "../components/Section";
+import { Section } from "../components/Section";
+import PageHero from "../components/PageHero";
 import Reveal from "../components/Reveal";
 import Icon from "../components/Icon";
 import { useLang } from "../lib/useLang";
@@ -10,9 +11,12 @@ export default function Documents() {
   const { pick } = useLang();
   return (
     <>
-      <Section className="bg-navy-50/60 dark:bg-navy-900/40">
-        <SectionHeader eyebrow={t("documents.eyebrow")} title={t("documents.title")} subtitle={t("documents.subtitle")} center />
-      </Section>
+      <PageHero
+        image="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=2000&q=80"
+        eyebrow={t("documents.eyebrow")}
+        title={t("documents.title")}
+        subtitle={t("documents.subtitle")}
+      />
 
       <Section>
         <div className="grid gap-5 sm:grid-cols-2">

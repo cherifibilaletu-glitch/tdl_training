@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { Section, SectionHeader } from "../components/Section";
+import { Section } from "../components/Section";
+import PageHero from "../components/PageHero";
 import Reveal from "../components/Reveal";
 import { useLang } from "../lib/useLang";
 import { GALLERY } from "../data/gallery";
@@ -9,9 +10,12 @@ export default function Gallery() {
   const { pick } = useLang();
   return (
     <>
-      <Section className="bg-navy-50/60 dark:bg-navy-900/40">
-        <SectionHeader eyebrow={t("gallery.eyebrow")} title={t("gallery.title")} subtitle={t("gallery.subtitle")} center />
-      </Section>
+      <PageHero
+        image="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=2000&q=80"
+        eyebrow={t("gallery.eyebrow")}
+        title={t("gallery.title")}
+        subtitle={t("gallery.subtitle")}
+      />
 
       <Section>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
